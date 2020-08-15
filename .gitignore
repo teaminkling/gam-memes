@@ -3,11 +3,10 @@
 .idea/
 .vscode/
 
-# Environment
+# Environment/Local
 
 HISTORY.md
 .env
-
-# Local
-
 *.sqlite3
+node_modules/
+.nuxt/

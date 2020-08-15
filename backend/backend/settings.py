@@ -6,7 +6,7 @@ Set these:
 1. `SECRET_KEY` (`str`)
 2. `DEBUG` (`bool`, defaults to `False`)
 """
-
+vue create
 import os
 
 from pathlib import Path

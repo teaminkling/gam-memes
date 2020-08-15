@@ -29,4 +29,11 @@ there is a review process in place to implement this and other streamer-friendly
 
 ## devs beware
 
-run everything with DEBUG=1 prefixing the manage command. either do that or prefix it with a SECRET_KEY.
+- run everything with DEBUG=1 prefixing the manage command. either do that or prefix it with a SECRET_KEY.
+
+## tests
+
+look, we love tests and tdd/bdd but we all know it does add a dev performance overhead. let's just not do them and then
+improve quality so we can move fast, break things, and make our friends happy that we have such a great app?
+
+tests will be implemented later.
