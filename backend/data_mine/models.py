@@ -24,13 +24,11 @@ class MemeTemplate(models.Model):
     )
 
     likes = models.IntegerField(
-        default=0,
-        help_text="The number of times this template has been liked.",
+        default=0, help_text="The number of times this template has been liked.",
     )
 
     dislikes = models.IntegerField(
-        default=0,
-        help_text="The number of times this template has been disliked.",
+        default=0, help_text="The number of times this template has been disliked.",
     )
 
     throw_back_probability = models.DecimalField(
@@ -39,9 +37,7 @@ class MemeTemplate(models.Model):
             "How likely is it that, when selected, the meme template will simply be ignored and a new one selected? "
             "The default value is 0.0 (0%). This field is dynamically determined,"
         ),
-        validators=[
-            MaxValueValidator(1.0), MinValueValidator(0.0),
-        ],
+        validators=[MaxValueValidator(1.0), MinValueValidator(0.0),],
     )
 
     staleness_routine_override = models.DateTimeField(

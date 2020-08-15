@@ -21,7 +21,9 @@ class UserMeme(models.Model):
     template = models.ForeignKey(to="data_mine.MemeTemplate", on_delete=models.SET_NULL)
 
     url = models.CharField(
-        null=True, max_lengh=512, help_text="The URL to the user meme image stored on our server.",
+        null=True,
+        max_lengh=512,
+        help_text="The URL to the user meme image stored on our server.",
     )
 
     @property

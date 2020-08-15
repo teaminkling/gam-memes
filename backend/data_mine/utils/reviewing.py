@@ -2,6 +2,7 @@
 
 # TODO: Low priority. Start later.
 
+
 def staleness_routine() -> None:
     """
     Cyclically increase the staleness of all of the memes depending on their age and a voting heuristic.

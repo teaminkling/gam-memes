@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class DataMineConfig(AppConfig):
-    name = 'data_mine'
+    name = "data_mine"

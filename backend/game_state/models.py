@@ -3,12 +3,15 @@ import string
 
 from django.db import models
 
-from game_state.constants import GAME_ROOM_CODE_LENGTH. GAME_STATES
+from game_state.constants import GAME_ROOM_CODE_LENGTH, GAME_STATES
+
 
 class Game(models.Model):
     """An ephemeral game room."""
 
-    room_key = models.CharField(primary_key=True, unique=True, max_length=4, help_text="The unique room key.")
+    room_key = models.CharField(
+        primary_key=True, unique=True, max_length=4, help_text="The unique room key."
+    )
 
     # FIXME: Room deletion is not yet implemented. It must be implemented before release date to the internet.
 
@@ -18,9 +21,7 @@ class Game(models.Model):
     )
 
     state = models.CharField(
-        max_length=64,
-        help_text="The current state of the game.",
-        choices=GAME_STATES,
+        max_length=64, help_text="The current state of the game.", choices=GAME_STATES,
     )
 
     @classmethod
@@ -33,11 +34,11 @@ class Game(models.Model):
         There are some curse words here that might not be streamer friendly. This should be filterable.
         """
 
-        key: str = "".join(random.choice(string.ascii_uppercase) for _ in range(GAME_ROOM_CODE_LENGTH))
-
-        cls.objects.create(
-
+        key: str = "".join(
+            random.choice(string.ascii_uppercase) for _ in range(GAME_ROOM_CODE_LENGTH)
         )
+
+        cls.objects.create()
 
 
 class Player(models.Model):
@@ -48,6 +49,4 @@ class Player(models.Model):
     game = models.ForeignKey(to=Game, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = (
-            ("game", "name"),
-        )
+        unique_together = (("game", "name"),)
