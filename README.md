@@ -26,3 +26,7 @@ there is a review process in place to implement this and other streamer-friendly
 - robust game management/disconnect management: seamless disconnect and reconnect even across devices (repeated server
   calls simply favour the latest call for the user). not that secure, but who cares honestly.
 - being able to see all of the meme templates in a game before the game is even created (room creator only).
+
+## devs beware
+
+run everything with DEBUG=1 prefixing the manage command. either do that or prefix it with a SECRET_KEY.
