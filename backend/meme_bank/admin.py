@@ -1,1 +1,1 @@
-from django.contrib import admin
+"""Admin file for meme bank app."""

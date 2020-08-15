@@ -1,1 +1,1 @@
-from django.test import TestCase
+"""Tests for game state app."""

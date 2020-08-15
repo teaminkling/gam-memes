@@ -1,3 +1,5 @@
+"""Models related to data mining of meme templates."""
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
@@ -18,7 +20,7 @@ class MemeTemplate(models.Model):
         help_text="The URL to the template image stored on our server.",
     )
 
-    added_timesteamp = models.DateTimeField(
+    added_timestamp = models.DateTimeField(
         auto_now=True,
         help_text="The timestamp in which the template was data-mined or otherwise added.",
     )
@@ -37,7 +39,7 @@ class MemeTemplate(models.Model):
             "How likely is it that, when selected, the meme template will simply be ignored and a new one selected? "
             "The default value is 0.0 (0%). This field is dynamically determined,"
         ),
-        validators=[MaxValueValidator(1.0), MinValueValidator(0.0),],
+        validators=[MaxValueValidator(1.0), MinValueValidator(0.0)],
     )
 
     staleness_routine_override = models.DateTimeField(

@@ -6,10 +6,12 @@ Set these:
 1. `SECRET_KEY` (`str`)
 2. `DEBUG` (`bool`, defaults to `False`)
 """
-vue create
+
 import os
 
 from pathlib import Path
+from uuid import uuid4
+
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -19,6 +21,10 @@ DEBUG = True if os.environ["DEBUG"] else False
 
 if not SECRET_KEY and not DEBUG:
     raise RuntimeError("If DEBUG isn't specifically passed in, you need to specify a SECRET_KEY.")
+elif not SECRET_KEY:
+    # Generate a secret key if debug because it doesn't matter.
+
+    SECRET_KEY = str(uuid4())
 
 ALLOWED_HOSTS = ["*"]
 

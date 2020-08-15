@@ -1,3 +1,5 @@
+"""Models related to the meme bank."""
+
 from django.db import models
 
 
@@ -18,7 +20,7 @@ class UserMeme(models.Model):
     nulled.
     """
 
-    template = models.ForeignKey(to="data_mine.MemeTemplate", on_delete=models.SET_NULL)
+    template = models.ForeignKey(to="MemeTemplate", on_delete=models.SET_NULL)
 
     url = models.CharField(
         null=True,
@@ -37,7 +39,7 @@ class UserMeme(models.Model):
             If the URL is falsey.
         """
 
-        return bool(url)
+        return bool(self.url)
 
     def nuke(self) -> None:
         """

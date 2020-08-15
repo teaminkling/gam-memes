@@ -1,9 +1,11 @@
+"""Models related to game state."""
+
 import random
 import string
 
 from django.db import models
 
-from game_state.constants import GAME_ROOM_CODE_LENGTH, GAME_STATES
+from backend.game_state.constants import GAME_ROOM_CODE_LENGTH, GAME_STATE_CREATING, GAME_STATES
 
 
 class Game(models.Model):
@@ -21,24 +23,22 @@ class Game(models.Model):
     )
 
     state = models.CharField(
-        max_length=64, help_text="The current state of the game.", choices=GAME_STATES,
+        max_length=64, help_text="The current state of the game.", choices=GAME_STATES, default=GAME_STATE_CREATING
     )
 
-    @classmethod
+    @staticmethod
     def create(cls):
         """
         Create a game with a randomly-generated room key.
-
-        TODO
-        -----
-        There are some curse words here that might not be streamer friendly. This should be filterable.
         """
 
+        # TODO: There are some curse words here that might not be streamer friendly. This should be filterable.
+
         key: str = "".join(
-            random.choice(string.ascii_uppercase) for _ in range(GAME_ROOM_CODE_LENGTH)
+            random.choice(string.ascii_uppercase) for _ in range(GAME_ROOM_CODE_LENGTH),
         )
 
-        cls.objects.create()
+        Game.objects.create(room_key=key)
 
 
 class Player(models.Model):

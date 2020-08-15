@@ -3,13 +3,14 @@ Constants used for the game state.
 
 Notes
 -----
-
 If they are grouped up, they should all start with the same prefix and all states with that prefix should ideally start
 with a different character. If this is not possible, they should at least start with a different word.
 
 An example of this is `GAME_STATE_CREATING` and `GAME_STATE_CREATING_MEMES`. The latter was changed to
 `GAME_STATE_FORGING_MEMES` and it still makes sense but now starts with an F.
 """
+
+from typing import Collection, Tuple
 
 #
 # Game state constants.
