@@ -20,11 +20,13 @@ class UserMeme(models.Model):
     nulled.
     """
 
-    template = models.ForeignKey(to="MemeTemplate", on_delete=models.SET_NULL)
+    template = models.ForeignKey(
+        to="data_mine.MemeTemplate", null=True, on_delete=models.SET_NULL,
+    )
 
     url = models.CharField(
         null=True,
-        max_lengh=512,
+        max_length=512,
         help_text="The URL to the user meme image stored on our server.",
     )
 

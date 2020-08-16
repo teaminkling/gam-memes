@@ -3,8 +3,9 @@ Settings file that depend on environment variables.
 
 Set these:
 
-1. `SECRET_KEY` (`str`)
-2. `DEBUG` (`bool`, defaults to `False`)
+1. `SECRET_KEY` (`str`, mandatory if not `DEBUG`, otherwise defaults to a UUID4 string).
+2. `DEBUG` (`bool`, defaults to `False`).
+3. `REDIS_HOST` (`str`, mandatory if not `DEBUG`, otherwise defaults to `127.0.0.1`).
 """
 
 import os
@@ -15,18 +16,22 @@ from uuid import uuid4
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
-SECRET_KEY = os.environ("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = True if os.environ["DEBUG"] else False
+DEBUG = True if os.environ.get("DEBUG") else False
 
 if not SECRET_KEY and not DEBUG:
-    raise RuntimeError("If DEBUG isn't specifically passed in, you need to specify a SECRET_KEY.")
+    raise RuntimeError(
+        "If DEBUG isn't specifically passed in, you need to specify a SECRET_KEY."
+    )
 elif not SECRET_KEY:
     # Generate a secret key if debug because it doesn't matter.
 
     SECRET_KEY = str(uuid4())
 
-ALLOWED_HOSTS = ["*"]
+# FIXME: This should actually be set once we have a name for the app.
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 #
 # Application definition.
@@ -39,9 +44,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "game_state",
     "data_mine",
     "meme_bank",
-    "game_state",
 ]
 
 MIDDLEWARE = [
@@ -56,11 +61,25 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "backend.urls"
 
-# Templates are not used in this project.
-
-TEMPLATES = []
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ],
+        },
+    },
+]
 
 WSGI_APPLICATION = "backend.wsgi.application"
+
+ASGI_APPLICATION = "backend.asgi.application"
 
 #
 # Database configuration.

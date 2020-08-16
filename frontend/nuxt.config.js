@@ -9,7 +9,7 @@ export default {
         {
             from: '^/security.txt',
             to: '/.well-known/security.txt',
-            statusCode: 301
+            statusCode: 301,
         },
     ],
 };

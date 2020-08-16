@@ -5,7 +5,7 @@ import string
 
 from django.db import models
 
-from backend.game_state.constants import GAME_ROOM_CODE_LENGTH, GAME_STATE_CREATING, GAME_STATES
+from .constants import GAME_ROOM_CODE_LENGTH, GAME_STATE_CREATING, GAME_STATES
 
 
 class Game(models.Model):
@@ -23,7 +23,10 @@ class Game(models.Model):
     )
 
     state = models.CharField(
-        max_length=64, help_text="The current state of the game.", choices=GAME_STATES, default=GAME_STATE_CREATING
+        max_length=64,
+        help_text="The current state of the game.",
+        choices=GAME_STATES,
+        default=GAME_STATE_CREATING,
     )
 
     @staticmethod
@@ -34,8 +37,8 @@ class Game(models.Model):
 
         # TODO: There are some curse words here that might not be streamer friendly. This should be filterable.
 
-        key: str = "".join(
-            random.choice(string.ascii_uppercase) for _ in range(GAME_ROOM_CODE_LENGTH),
+        key: str = str(
+            random.choice(string.ascii_uppercase) for _ in range(GAME_ROOM_CODE_LENGTH)
         )
 
         Game.objects.create(room_key=key)

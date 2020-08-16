@@ -15,7 +15,7 @@ class MemeTemplate(models.Model):
 
     url = models.CharField(
         db_index=True,
-        max_lengh=512,
+        max_length=512,
         unique=True,
         help_text="The URL to the template image stored on our server.",
     )
@@ -35,6 +35,8 @@ class MemeTemplate(models.Model):
 
     throw_back_probability = models.DecimalField(
         default=0.0,
+        decimal_places=4,
+        max_digits=16,
         help_text=(
             "How likely is it that, when selected, the meme template will simply be ignored and a new one selected? "
             "The default value is 0.0 (0%). This field is dynamically determined,"
@@ -52,13 +54,13 @@ class MemeTemplate(models.Model):
     )
 
     @property
-    def use_count(self):
+    def use_count(self) -> int:
         """Get the amount of times this template has been used in the game."""
 
         raise NotImplemented("use_count has not been implemented.")
 
     @property
-    def approval_rating(self):
+    def approval_rating(self) -> float:
         """Get the approval heuristic based on view count, likes, and dislikes."""
 
         raise NotImplemented("approval_rating has not been implemented.")

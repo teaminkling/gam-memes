@@ -31,9 +31,22 @@ there is a review process in place to implement this and other streamer-friendly
 
 - run everything with DEBUG=1 prefixing the manage command. either do that or prefix it with a SECRET_KEY.
 
+## why not websocket
+
+mostly because i want to iterate quickly and i don't believe there will be much of a performance overhead. we can use
+long-polling and 30-second long promises for pretty much anything that requires a response from the server, and the
+rest of the requests have an immediate success/failure response pattern.
+
 ## tests
 
 look, we love tests and tdd/bdd but we all know it does add a dev performance overhead. let's just not do them and then
 improve quality so we can move fast, break things, and make our friends happy that we have such a great app?
 
 tests will be implemented later.
+
+## todo
+
+lots of todo items but these ones aren't in code comments:
+
+- rate limiting and other neat security features.
+- use of cache backend.
