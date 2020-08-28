@@ -2,6 +2,8 @@ export default {
     modules: [
         '@nuxtjs/sitemap',
         '@nuxtjs/redirect-module',
+        '@nuxtjs/bulma',
+        '@nuxtjs/fontawesome',
     ],
     mode: 'spa',
     target: 'static',
@@ -12,4 +14,18 @@ export default {
             statusCode: 301,
         },
     ],
+    build: {
+        postcss: {
+            preset: {
+                features: {
+                    customProperties: false,
+                }
+            }
+        }
+    },
+    fontawesome: {
+        icons: {
+            brands: true,
+        }
+    },
 };

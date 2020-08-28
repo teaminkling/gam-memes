@@ -13,10 +13,10 @@ class JoinRoomView(View):
 
         The types of outcomes are:
 
-        - Success: Username not taken and room code exists.
-        - Failure: Username is taken but the room code does exist.
-        - Failure: The room code does not exist.
-        - Failure: You've been rate limited.
+        - Success! Username: not taken and room code exists.
+        - Failure! Username: taken, but the room code exists.
+        - Failure! The room code does not exist.
+        - Failure! You've been rate limited.
 
         Parameters
         ----------
@@ -88,8 +88,9 @@ class StartRoomGameView(View):
         -------
         `HttpResponse`
             JSON response used to
-
         """
+
+        pass
 
     def post(self, request: HttpRequest) -> HttpResponse:
         """
@@ -97,9 +98,13 @@ class StartRoomGameView(View):
 
         Parameters
         ----------
-        request
+        request: `HttpRequest`
+            The `HttpRequest`.
 
         Returns
         -------
-
+        `HttpResponse`
+            JSON response used to
         """
+
+        pass

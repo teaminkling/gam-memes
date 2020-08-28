@@ -22,10 +22,13 @@ there is a review process in place to implement this and other streamer-friendly
 
 ## features that are dope
 
+> but these features aren't there yet
+
 - meme rating and reviewing: some meme templates aren't that good, so we want to rate each one as we see it.
 - robust game management/disconnect management: seamless disconnect and reconnect even across devices (repeated server
   calls simply favour the latest call for the user). not that secure, but who cares honestly.
 - being able to see all of the meme templates in a game before the game is even created (room creator only).
+- 1st place, 2nd place, 3rd place votes for games with 3+ players.
 
 ## devs beware
 
