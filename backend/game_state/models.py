@@ -15,7 +15,7 @@ class Game(models.Model):
         primary_key=True, unique=True, max_length=4, help_text="The unique room key."
     )
 
-    # FIXME: Room deletion is not yet implemented. It must be implemented before release date to the internet.
+    # FIXME: I have not implemented room deletion. It must be implemented before release date to the internet.
 
     game_started_timestamp = models.DateTimeField(
         auto_now=True,

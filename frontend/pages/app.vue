@@ -1,11 +1,54 @@
 <template lang="pug">
   div#app
-    h1 game state is <{{ gameState }}>
+    button.button(@click="gameState = 'CREATING'") CREATING
+    button.button(@click="gameState = 'WAITING_FOR_PLAYERS'") WAITING_FOR_PLAYERS
+    button.button(@click="gameState = 'FORGING_MEMES'") FORGING_MEMES
+    button.button(@click="gameState = 'JUDGING_MEMES'") JUDGING_MEMES
+    button.button(@click="gameState = 'PRESENTING_WINNERS'") PRESENTING_WINNERS
 
-    lobby
+    div.columns
+      name-assign-panel(
+        v-if="['CREATING'].includes(gameState)"
+      )
+
+      lobby-panel(
+        v-if="['WAITING_FOR_PLAYERS'].includes(gameState)"
+      )
+
+      in-game-players-panel(
+        v-if="['FORGING_MEMES', 'JUDGING_MEMES', 'PRESENTING_WINNERS'].includes(gameState)"
+      )
+
+      join-room-panel(
+        v-if="['CREATING'].includes(gameState)"
+      )
+
+      settings-panel(
+        v-if="['WAITING_FOR_PLAYERS'].includes(gameState)"
+      )
+
+      game-creation-panel(
+        v-if="['CREATING'].includes(gameState)"
+      )
+
+      room-code-panel(
+        v-if="['WAITING_FOR_PLAYERS'].includes(gameState)"
+      )
+
+      editor-panel(
+        v-if="['FORGING_MEMES'].includes(gameState)"
+      )
+
+      judging-panel(
+        v-if="['JUDGING_MEMES'].includes(gameState)"
+      )
+
+      winner-panel(
+        v-if="['PRESENTING_WINNERS'].includes(gameState)"
+      )
 </template>
 
-<script>
+<script lang="ts">
 /**
  * This is the main app logic page for the client application. There is a game state on the backend that is synced and
  * reflected by this Vue client.
@@ -41,15 +84,48 @@
  * Users can see two panels: in-game panel, and the winner panel. The winner panel only displays the winner with the
  * name of the winner with their vote tally. In this phase, the number of points other players have won in the delta
  * will be displayed in the in-game panel.
+ *
+ * That means there are the following panels:
+ *
+ * - `nameAssignPanel`
+ * - `joinRoomPanel`
+ * - `gameCreationPanel`
+ * - `lobbyPanel`
+ * - `settingsPanel`
+ * - `roomCodePanel`
+ * - `inGamePlayersPanel`
+ * - `editorPanel` (67% of the play area)
+ * - `judgingPanel` (67% of the play area)
+ * - `winnerPanel` (67% of the play area)
  */
 
-import lobby from '@/components/game/lobby.vue';
-import { CREATING_STATE } from '@/constants/state'
+import { CREATING_STATE } from '~/constants/state'
+
+import NameAssignPanel from "@/components/game/nameAssignPanel";
+import EditorPanel from "@/components/game/editorPanel";
+import GameCreationPanel from "@/components/game/gameCreationPanel";
+import InGamePlayersPanel from "@/components/game/inGamePlayersPanel";
+import JoinRoomPanel from "@/components/game/joinRoomPanel";
+import JudgingPanel from "@/components/game/judgingPanel";
+import LobbyPanel from "@/components/game/lobbyPanel";
+import RoomCodePanel from "@/components/game/roomCodePanel";
+import SettingsPanel from "@/components/game/settingsPanel";
+import WinnerPanel from "@/components/game/winnerPanel";
 
 export default {
   name: 'app',
+  layout: 'base',
   components: {
-    lobby,
+    WinnerPanel,
+    SettingsPanel,
+    RoomCodePanel,
+    LobbyPanel,
+    JudgingPanel,
+    JoinRoomPanel,
+    InGamePlayersPanel,
+    GameCreationPanel,
+    EditorPanel,
+    NameAssignPanel
   },
   data() {
     return {
@@ -74,9 +150,7 @@ export default {
       memes: [],
     }
   },
-  methods: {
-
-  },
+  methods: {},
   mounted() {
     /*
      * Start with the default game state.

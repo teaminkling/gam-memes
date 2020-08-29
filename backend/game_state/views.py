@@ -41,7 +41,7 @@ class CreateRoomView(View):
 
         The types of outcomes are:
 
-        - Success: Room is successfully created.
+        - Success: Successfully created room.
         - Failure: There are no more rooms left (meaning somehow there are 400k+ rooms concurrently).
 
         Parameters
