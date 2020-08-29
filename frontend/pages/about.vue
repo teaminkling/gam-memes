@@ -1,10 +1,10 @@
 <template lang="pug">
-  h1 Terms
+  h1 About
 </template>
 
 <script>
 export default {
-  name: 'terms',
+  name: 'about',
   layout: 'base',
 }
 </script>

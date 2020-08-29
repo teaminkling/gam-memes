@@ -48,6 +48,7 @@ import { CREATING_STATE } from '@/constants/state'
 
 export default {
   name: 'app',
+  layout: 'base',
   components: {
     lobby,
   },

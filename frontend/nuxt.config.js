@@ -24,8 +24,24 @@ export default {
         }
     },
     fontawesome: {
+        component: 'fa',
         icons: {
-            brands: true,
+            solid: [
+                'faBalanceScale',
+                'faHeart',
+                'faLock',
+                'faHome',
+                'faAddressCard',
+                'faFileAlt',
+                'faUserShield',
+                'faGamepad',
+                'faBug',
+                'faPaintBrush',
+            ],
+            brands: [
+                'faGithub',
+                'faDiscord',
+            ],
         }
     },
 };
