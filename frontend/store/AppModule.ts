@@ -1,18 +1,17 @@
-import {Module, Mutation, VuexModule} from 'vuex-module-decorators';
+import { Module, Mutation, VuexModule } from 'vuex-module-decorators';
 
-import {GameState} from "~/data/GameState";
+import Player from "~/data/Player";
+import GameState from "~/data/GameState";
 
 /**
  * Define the states and mutations on that states that are possible for the application.
  */
 
-@Module({
-  name: 'appStore', stateFactory: true, namespaced: true,
-})
+@Module({name: 'AppModule', stateFactory: true, namespaced: true})
 export default class AppModule extends VuexModule {
   /* The player's authentication name. */
 
-  playerName: string = "";
+  currentPlayer: Player = {"name": "", ready: false, vip: false};
 
   /* Room code used to authenticate along with user name. */
 
@@ -20,7 +19,7 @@ export default class AppModule extends VuexModule {
 
   /* Players currently in the client's game and the players' meta-information. */
 
-  players: any[] = [];
+  players: Player[] = [];
 
   /* Game client state. */
 
@@ -32,7 +31,7 @@ export default class AppModule extends VuexModule {
 
   @Mutation
   setName(name: string) {
-    this.playerName = name;
+    this.currentPlayer.name = name;
   }
 
   @Mutation
