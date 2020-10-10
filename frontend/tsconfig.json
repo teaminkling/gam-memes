@@ -18,6 +18,8 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
     "lib": [
       "ESNext",
       "ESNext.AsyncIterable",
