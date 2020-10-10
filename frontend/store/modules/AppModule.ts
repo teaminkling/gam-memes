@@ -1,6 +1,6 @@
-import { Module, VuexModule, Mutation } from 'vuex-module-decorators';
+import {Module, Mutation, VuexModule} from 'vuex-module-decorators';
 
-import { GameState } from "~/data/GameState";
+import {GameState} from "~/data/GameState";
 
 /**
  * Define the states and mutations on that states that are possible for the application.
@@ -38,9 +38,5 @@ export default class AppModule extends VuexModule {
   @Mutation
   setState(state: GameState) {
     this.gameState = state;
-  }
-
-  get getGameState() {
-    return this.gameState
   }
 }
