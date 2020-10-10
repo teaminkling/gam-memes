@@ -99,18 +99,18 @@
  * - `winnerPanel` (67% of the play area)
  */
 
-import { CREATING_STATE } from '~/constants/state'
+import { CREATING_STATE } from "~/constants/state.ts";
 
-import NameAssignPanel from "@/components/game/nameAssignPanel";
-import EditorPanel from "@/components/game/editorPanel";
-import GameCreationPanel from "@/components/game/gameCreationPanel";
-import InGamePlayersPanel from "@/components/game/inGamePlayersPanel";
-import JoinRoomPanel from "@/components/game/joinRoomPanel";
-import JudgingPanel from "@/components/game/judgingPanel";
-import LobbyPanel from "@/components/game/lobbyPanel";
-import RoomCodePanel from "@/components/game/roomCodePanel";
-import SettingsPanel from "@/components/game/settingsPanel";
-import WinnerPanel from "@/components/game/winnerPanel";
+import NameAssignPanel from "@/components/game/nameAssignPanel.vue";
+import EditorPanel from "@/components/game/editorPanel.vue";
+import GameCreationPanel from "@/components/game/gameCreationPanel.vue";
+import InGamePlayersPanel from "@/components/game/inGamePlayersPanel.vue";
+import JoinRoomPanel from "@/components/game/joinRoomPanel.vue";
+import JudgingPanel from "@/components/game/judgingPanel.vue";
+import LobbyPanel from "@/components/game/lobbyPanel.vue";
+import RoomCodePanel from "@/components/game/roomCodePanel.vue";
+import SettingsPanel from "@/components/game/settingsPanel.vue";
+import WinnerPanel from "@/components/game/winnerPanel.vue";
 
 export default {
   name: 'app',
@@ -127,15 +127,15 @@ export default {
     EditorPanel,
     NameAssignPanel
   },
-  data() {
+  data: function (): { playerName: string; players: any[]; roomCode: string; gameState: string; memes: any[] } {
     return {
       /* The player's authentication name. */
 
-      playerName: null,
+      playerName: "",
 
       /* Room code used to authenticate along with user name. */
 
-      roomCode: null,
+      roomCode: "",
 
       /* Players currently in the client's game and the players' meta-information. */
 
@@ -143,7 +143,7 @@ export default {
 
       /* Game client state. */
 
-      gameState: null,
+      gameState: "",
 
       /* Memes and their associated votes. Not sent to the server, but allows pre-fetching of results page. */
 
