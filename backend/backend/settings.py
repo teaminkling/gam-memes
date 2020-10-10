@@ -13,7 +13,6 @@ import os
 from pathlib import Path
 from uuid import uuid4
 
-
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
