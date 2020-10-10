@@ -14,15 +14,9 @@ export default {
             statusCode: 301,
         },
     ],
-    build: {
-        postcss: {
-            preset: {
-                features: {
-                    customProperties: false,
-                }
-            }
-        }
-    },
+    css: [
+        "~layouts/global.css",
+    ],
     fontawesome: {
         component: 'fa',
         icons: {
@@ -44,4 +38,14 @@ export default {
             ],
         }
     },
+    build: {
+        postcss: {
+            preset: {
+                features: {
+                    customProperties: false,
+                }
+            }
+        }
+    },
+    buildModules: ['@nuxt/typescript-build'],
 };

@@ -3,6 +3,8 @@
     div#wrapper
       div.container
         shoulders
+        br
+
         nuxt
     feet
 </template>
@@ -10,7 +12,7 @@
 <style scoped>
   #base {
     display: flex;
-    min-height: 122vh;
+    min-height: 118vh;
     flex-direction: column;
   }
 

@@ -1,10 +1,11 @@
 <template lang="pug">
-  h1 lobby
+  div.column
+    p winnerPanel
 </template>
 
 <script>
 export default {
-  name: "lobby"
+  name: "winnerPanel"
 }
 </script>
 

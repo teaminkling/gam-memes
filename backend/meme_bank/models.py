@@ -12,7 +12,7 @@ class UserMeme(models.Model):
     A note to devs: the image is not likely to be viewed by anybody except for the people in a game. Keep privacy in
     mind.
 
-    **Under no circumstances** should any meme URL ever be explicitly mined. Users trust us with the memes they make
+    **Under no circumstances** should any meme URL ever be explicitly mined. Users trust us with the memes they make,
     and we should be mindful of such. As a result, while it might be easier to keep URLs small, they are better off as
     long, unguessable URLs stored on our CDN.
 

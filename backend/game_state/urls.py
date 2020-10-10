@@ -1,5 +1,5 @@
 """
 URL configuration for the game state.
 
-This app's URLs is typically used to communicate from the frontend.
+The frontend communicates with this component and therefore interacts with the following URLs.
 """
