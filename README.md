@@ -53,3 +53,7 @@ lots of todo items but these ones aren't in code comments:
 
 - rate limiting and other neat security features.
 - use of cache backend.
+
+## constants
+
+modify your constants in frontend/constants
