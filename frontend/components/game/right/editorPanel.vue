@@ -13,7 +13,7 @@
 // TODO: notifications errors for the developers (me, sigh) to fix issues when running
 // in production (no vue debugger)
 
-<script>
+<script lang="ts">
 import ImageEditor from '@toast-ui/vue-image-editor/src/ImageEditor.vue';
 
 /* To use the included UI, just import the CSS. */

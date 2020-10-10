@@ -36,7 +36,7 @@
       p.count Waiting on #[b 3] players!
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "inGamePlayersPanel"
 }

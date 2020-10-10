@@ -8,7 +8,7 @@
           button.button.is-large.is-rounded New Lobby
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "gameCreationPanel"
 }

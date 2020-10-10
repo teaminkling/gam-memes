@@ -14,12 +14,19 @@
                 td.ready {{ player.ready }}
 
       p.count
-        | Total Players: <b>{{ $parent['players'].length }}</b>
+        | Total Players: <b>{{ playerCount }}</b>
 </template>
 
-<script>
+<script lang="ts">
+import { appModuleStore } from '@/store';
+
 export default {
-  name: "lobbyPanel"
+  name: "lobbyPanel",
+  computed: {
+    playerCount() {
+      return appModuleStore.players.length;
+    }
+  }
 }
 </script>
 

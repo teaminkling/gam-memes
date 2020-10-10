@@ -1,4 +1,4 @@
-export enum GameState {
+enum GameState {
   /**
    * User can see three panels: name assignment table, join room code, and new game creation panel.
    * At the bottom of the page, a "how to play" button is present.
@@ -35,3 +35,5 @@ export enum GameState {
    */
   PRESENTING_WINNERS_STATE,
 }
+
+export default GameState;

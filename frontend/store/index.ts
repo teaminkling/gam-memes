@@ -4,20 +4,13 @@
  * We load an empty store at first and dynamically register modules at a later point.
  */
 
-import {Store} from 'vuex';
-import {getModule} from 'vuex-module-decorators'
+import { Store } from 'vuex';
 
-import AppModule from "~/store/modules/AppModule";
-
-/* Define the modules for the store at the top-level of the store index. */
-
-let appModule: AppModule;
+import { initialiseStores } from '@/utils/store-accessor';
 
 /* Define an initialiser for the modules. */
 
-function initializer(store: Store<any>): void {
-  appModule = getModule(AppModule, store);
-}
+const initializer: (store: Store<any>) => void = (store: Store<any>) => initialiseStores(store);
 
 /* Export the initializer as a plugin. */
 
@@ -25,4 +18,4 @@ export const plugins = [initializer];
 
 /* Re-export the modules such that they can be imported from the store. */
 
-export {appModule};
+export * from '@/utils/store-accessor';

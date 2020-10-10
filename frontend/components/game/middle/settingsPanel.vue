@@ -24,7 +24,7 @@
             input.input.is-large.is-rounded.has-text-centered(type="input" value="8")
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "settingsPanel"
 }

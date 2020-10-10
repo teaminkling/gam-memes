@@ -5,7 +5,7 @@
         | Room Code
 
       p.room-code.has-text-success
-        | {{ $parent["roomCode"] || "&lt;ERROR&gt;" }}
+        | {{ roomCode }}
     div
       button.button.is-success.is-large.is-rounded.is-outlined.start(disabled)
         | Start
@@ -16,14 +16,21 @@
       p.ready-warning {{ remaining }} player(s) still need to ready up!
 </template>
 
-<script>
+<script lang="ts">
+import Player from "@/data/Player";
+
+import { appModuleStore } from '@/store';
+
 export default {
   name: "roomCodePanel",
-  data() {
-    return {
+  computed: {
+    remaining() {
       /* We only check for falseyness of the ready value, not explicitly "Ready". */
 
-      remaining: this.$parent["players"].filter(player => !player["ready"]).length,
+      return appModuleStore.players.filter((player: Player) => !player.ready).length;
+    },
+    roomCode() {
+      return appModuleStore.roomCode || "ERROR";
     }
   }
 }
