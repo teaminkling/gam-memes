@@ -11,7 +11,7 @@ import GameState from "~/data/GameState";
 export default class AppModule extends VuexModule {
   /* The player's authentication name. */
 
-  currentPlayer: Player = {"name": "", ready: false, vip: false};
+  currentPlayer: Player = {"name": "", ready: false, vip: false, score: 0.0};
 
   /* Room code used to authenticate along with user name. */
 

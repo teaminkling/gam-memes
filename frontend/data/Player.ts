@@ -15,4 +15,8 @@ export default interface Player {
    * pertains to the correct user.
    */
   vip: boolean,
+  /**
+   * The score this player has in this game.
+   */
+  score: number,
 }
