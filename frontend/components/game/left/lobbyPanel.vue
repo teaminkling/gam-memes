@@ -8,13 +8,13 @@
         div.container
           table.table.is-striped.is-hoverable.is-fullwidth
             // TODO: The current player must be in this list without needing a backend call.
-            tbody(v-for="player in $parent['players']")
+            tbody(v-for="player in players")
               tr
                 td.name {{ player.name }}
                 td.ready {{ player.ready }}
 
       p.count
-        | Total Players: <b>{{ playerCount }}</b>
+        | Total Players: <b>{{ players.length }}</b>
 </template>
 
 <script lang="ts">
@@ -23,9 +23,9 @@ import { appModuleStore } from '@/store';
 export default {
   name: "lobbyPanel",
   computed: {
-    playerCount() {
-      return appModuleStore.players.length;
-    }
+    players() {
+      return appModuleStore.players;
+    },
   }
 }
 </script>

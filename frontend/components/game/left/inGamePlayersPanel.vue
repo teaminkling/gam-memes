@@ -7,38 +7,33 @@
       div.has-text-left
         div.container
           table.table.is-striped.is-hoverable.is-fullwidth
-            tbody
+            tbody(v-for="player in players")
               tr
-                td.name TEST
-                td.ready DONE
-                td.score 11
-              tr
-                td.name TEST
+                td.name {{ player.name }}
                 td.ready
-                td.score 6
-              tr
-                td.name TEST
-                td.ready
-                td.score 2
-              tr
-                td.name TEST
-                td.ready
-                td.score 2
-              tr
-                td.name TEST
-                td.ready DONE
-                td.score 1
-              tr
-                td.name TEST
-                td.ready DONE
-                td.score 0
-
-      p.count Waiting on #[b 3] players!
+                  p(v-if="player.ready === true") Done
+                td.score {{ player.score }}
+      div(v-if="remaining")
+        p.count Waiting on {{ remaining }} players!
 </template>
 
 <script lang="ts">
+import { appModuleStore } from '@/store';
+
+import Player from "~/data/Player";
+
 export default {
-  name: "inGamePlayersPanel"
+  name: "inGamePlayersPanel",
+  computed: {
+    players() {
+      return appModuleStore.players;
+    },
+    remaining() {
+      /* We only check for falseyness of the ready value, not explicitly "Ready". */
+
+      return appModuleStore.players.filter((player: Player) => !player.ready).length;
+    },
+  }
 }
 </script>
 
