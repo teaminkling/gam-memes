@@ -1,52 +1,42 @@
-"""Administrative view objects for data mine models."""
+"""Administrative view objects for meme bank models."""
 
 from django.contrib import admin
 from django.utils.html import format_html
 
-from data_mine.models import MemeTemplate
+from meme_bank.models import UserMeme
 
 
-@admin.register(MemeTemplate)
-class MemeTemplateAdmin(admin.ModelAdmin):
-    """Admin view for the `MemeTemplate` model."""
-
+@admin.register(UserMeme)
+class UserMemeAdmin(admin.ModelAdmin):
     fields = (
         "image",
         "url",
         "link",
-        "likes",
-        "dislikes",
-        "approval_rating",
-        "use_count",
-        "throw_back_probability",
+        "template",
+        "player",
     )
 
     list_display = (
         "id",
         "thumbnail",
         "link",
-        "likes",
-        "dislikes",
-        "approval_rating",
-        "use_count",
-        "throw_back_probability",
+        "template",
+        "player",
     )
 
     readonly_fields = (
         "image",
         "link",
-        "use_count",
-        "approval_rating",
     )
 
     @staticmethod
-    def image(instance: MemeTemplate) -> str:
+    def image(instance: UserMeme) -> str:
         """
         An embeddable image.
 
         Parameters
         ----------
-        instance : `MemeTemplate`
+        instance : `UserMeme`
             The template under examination.
 
         Returns
@@ -60,13 +50,13 @@ class MemeTemplateAdmin(admin.ModelAdmin):
         return format_html(f"<img src='{instance.url}' style='{style_string}' />")
 
     @staticmethod
-    def thumbnail(instance: MemeTemplate):
+    def thumbnail(instance: UserMeme):
         """
         An embeddable image for the list display.
 
         Parameters
         ----------
-        instance : `MemeTemplate`
+        instance : `UserMeme`
             The meme under examination.
 
         Returns
@@ -86,13 +76,13 @@ class MemeTemplateAdmin(admin.ModelAdmin):
         return format_html(f"<img src='{instance.url}' style='{style_string}' />")
 
     @staticmethod
-    def link(instance: MemeTemplate) -> str:
+    def link(instance: UserMeme) -> str:
         """
         A clickable URL for this meme.
 
         Parameters
         ----------
-        instance : `MemeTemplate`
+        instance : `UserMeme`
             The template under examination.
 
         Returns

@@ -4,7 +4,7 @@ import requests
 
 from requests.models import Response
 
-from backend.data_mine.models import MemeTemplate
+from data_mine.models import MemeTemplate
 
 IMGFLIP_GET_MEMES_ENDPOINT: str = "https://api.imgflip.com/get_memes"
 """URL for the popular memes endpoint."""
@@ -76,7 +76,8 @@ class ImgflipSource:
         Parameters
         ----------
         number: `int`
-            The number of memes to scrape for, at minimum. The function may scrape more than this number.
+            The number of memes to scrape for, at minimum. The function may scrape more than this
+            number.
         """
 
         raise NotImplementedError("scrape_user_memes is not implemented.")

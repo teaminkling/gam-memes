@@ -79,7 +79,7 @@ class MemeTemplate(models.Model):
     approval_rating.fget.short_description = "Approval Heuristic"
 
     def __str__(self):
-        return f"Meme Template (ID= {self.id}, URL={self.url})"
+        return f"Meme Template #{self.id} (URL={self.url})"
 
     class Meta:
         verbose_name = "Meme Template"
