@@ -3,14 +3,12 @@ Constants used for the game state.
 
 Notes
 -----
-If they are grouped up, they should all start with the same prefix and all states with that prefix should ideally start
-with a different character. If this is not possible, they should at least start with a different word.
-
-An example of this is `GAME_STATE_CREATING` and `GAME_STATE_CREATING_MEMES`. The latter was changed to
-`GAME_STATE_FORGING_MEMES` and it still makes sense but now starts with an F.
+If they are grouped up, they should all start with the same prefix and all states with that prefix
+should ideally start with a different character. If this is not possible, they should at least
+start with a different word.
 """
 
-from typing import Collection, Tuple
+from typing import Collection, Tuple, Set
 
 #
 # Game state constants.
@@ -46,3 +44,87 @@ GAME_STATES: Collection[Tuple[str, str]] = (
 
 GAME_ROOM_CODE_LENGTH: int = 4
 """The length of the game code."""
+
+TOTAL_CODE_REGEN_ATTEMPTS: int = 100
+"""Number of attempts the system will make at most to regenerate the room code on collision."""
+
+#
+# Word lists.
+#
+
+# noinspection SpellCheckingInspection
+PROHIBITED_ROOM_CODE_WORDS: Set[str] = {
+    "ANUS",
+    "ARSE",
+    "BTCH",
+    "BICH",
+    "CLIT",
+    "CLTS",
+    "COCK",
+    "COCC",
+    "COKK",
+    "COKC",
+    "COON",
+    "CUNT",
+    "DAGO",
+    "DAMN",
+    "DICK",
+    "DIKE",
+    "DYKE",
+    "FAGT",
+    "FAGG",
+    "FAGA",
+    "FAGO",
+    "FAGU",
+    "FAGI",
+    "FARK",
+    "FUCC",
+    "FUCK",
+    "FUKT",
+    "FUCT",
+    "GOOK",
+    "GOUK",
+    "HEEB",
+    "HOMO",
+    "JAPS",
+    "JAPP",
+    "JIZZ",
+    "JIZM",
+    "JISM",
+    "KIKE",
+    "KYKE",
+    "KYKK",
+    "MICK",
+    "MICC",
+    "MUFF",
+    "NIGR",
+    "NIGA",
+    "PAKI",
+    "PAKK",
+    "PISS",
+    "POON",
+    "PUTO",
+    "SHIT",
+    "SHYT",
+    "SHTY",
+    "SHTT",
+    "SLUT",
+    "SLTY",
+    "SMEG",
+    "TARD",
+    "TITS",
+    "TWAT",
+    "WANK",
+}
+"""
+Words that should not show up on streams or may offend players of the game.
+
+Notes
+-----
+Well, this isn't going to look good on the public code search.
+
+In all seriousness, Inkling Interactive is committed to ensuring a safe and friendly environment 
+for as many people as possible while playing our games or using our work. If you would like to 
+contribute to this list (especially if an offensive word has been seen in-game), please feel free
+to contact us or open a pull request.
+"""

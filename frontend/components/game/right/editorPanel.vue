@@ -10,9 +10,6 @@
 }
 </style>
 
-// TODO: notifications errors for the developers (me, sigh) to fix issues when running
-// in production (no vue debugger)
-
 <script lang="ts">
 import ImageEditor from '@toast-ui/vue-image-editor/src/ImageEditor.vue';
 
@@ -29,8 +26,9 @@ export default {
     return {
       options: {
         includeUI: {
-          initMenu: 'filter',
-          menuBarPosition: 'left'
+          initMenu: 'text',
+          menu: ["crop", "draw", "text", "icon"],
+          menuBarPosition: 'bottom'
         },
       }
     };
