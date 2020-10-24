@@ -3,6 +3,8 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
+from meme_bank.models import UserMeme
+
 
 class MemeTemplate(models.Model):
     """
@@ -17,6 +19,7 @@ class MemeTemplate(models.Model):
         db_index=True,
         max_length=512,
         unique=True,
+        verbose_name="URL",
         help_text="The URL to the template image stored on our server.",
     )
 
@@ -26,30 +29,33 @@ class MemeTemplate(models.Model):
     )
 
     likes = models.IntegerField(
-        default=0, help_text="The number of times this template has been liked.",
+        default=0,
+        help_text="The number of times this template has been liked.",
     )
 
     dislikes = models.IntegerField(
-        default=0, help_text="The number of times this template has been disliked.",
+        default=0,
+        help_text="The number of times this template has been disliked.",
     )
 
     throw_back_probability = models.DecimalField(
         default=0.0,
         decimal_places=4,
         max_digits=16,
+        verbose_name="Throw-back Probability",
         help_text=(
-            "How likely is it that, when selected, the meme template will simply be ignored and a new one selected? "
-            "The default value is 0.0 (0%). This field is dynamically determined,"
+            "How likely is it that, when selected, the template will be ignored and a new one "
+            "selected? This field is dynamically determined and goes from 0.0 to 1.0."
         ),
         validators=[MaxValueValidator(1.0), MinValueValidator(0.0)],
     )
 
-    staleness_routine_override = models.DateTimeField(
-        null=True,
-        blank=True,
+    staleness_routine_override = models.BooleanField(
+        default=False,
+        verbose_name="Staleness Routine Override",
         help_text=(
-            "If set to the date in which the override was last added, the throw_back_probability will be frozen and "
-            "not calculated by the staleness algorithm."
+            "If set, the throw-back probability will be frozen and not calculated by the "
+            "staleness algorithm."
         ),
     )
 
@@ -57,10 +63,25 @@ class MemeTemplate(models.Model):
     def use_count(self) -> int:
         """Get the amount of times this template has been used in the game."""
 
-        raise NotImplemented("use_count has not been implemented.")
+        return UserMeme.objects.filter(template_id=self.id).count()
+
+    use_count.fget.short_description = "Times Used in Memes"
 
     @property
     def approval_rating(self) -> float:
         """Get the approval heuristic based on view count, likes, and dislikes."""
 
-        raise NotImplemented("approval_rating has not been implemented.")
+        # TODO: This is a very basic algorithm for now does not influence view count. Research
+        #       must be done to determine a suitable algorithm including view count.
+
+        return float(self.likes - self.dislikes)
+
+    approval_rating.fget.short_description = "Approval Heuristic"
+
+    def __str__(self):
+        return f"Meme Template (ID= {self.id}, URL={self.url})"
+
+    class Meta:
+        verbose_name = "Meme Template"
+
+        verbose_name_plural = "Meme Templates"

@@ -5,7 +5,6 @@ Set these:
 
 1. `SECRET_KEY` (`str`, mandatory if not `DEBUG`, otherwise defaults to a UUID4 string).
 2. `DEBUG` (`bool`, defaults to `False`).
-3. `REDIS_HOST` (`str`, mandatory if not `DEBUG`, otherwise defaults to `127.0.0.1`).
 """
 
 import os
@@ -24,11 +23,10 @@ if not SECRET_KEY and not DEBUG:
         "If DEBUG isn't specifically passed in, you need to specify a SECRET_KEY."
     )
 elif not SECRET_KEY:
-    # Generate a secret key if debug because it doesn't matter.
+    # Generate a secret key if debug because it doesn't matter. Not recommended as you will need
+    # to clear your cookies every time you re-run the server.
 
     SECRET_KEY = str(uuid4())
-
-# FIXME: This should actually be set once we have a name for the app.
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
@@ -37,6 +35,7 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 #
 
 INSTALLED_APPS = [
+    "grappelli",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -59,6 +58,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "backend.urls"
+
+# The server needs templates if using the admin application, which we are.
 
 TEMPLATES = [
     {
@@ -95,8 +96,6 @@ DATABASES = {
 # Password validation.
 #
 
-# Passwords are only used for admin accounts.
-
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
@@ -107,9 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization configuration.
 #
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "en-au"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Australia/Melbourne"
 
 USE_I18N = True
 
@@ -122,3 +121,4 @@ USE_TZ = True
 #
 
 STATIC_URL = "/static/"
+STATIC_ROOT = "/static/"

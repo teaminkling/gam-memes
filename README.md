@@ -51,6 +51,7 @@ tests will be implemented later.
 
 lots of todo items but these ones aren't in code comments:
 
+- adjust the allowed hosts.
 - rate limiting and other neat security features.
 - use of cache backend.
 
