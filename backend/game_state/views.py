@@ -4,6 +4,11 @@ from django.http import HttpRequest, HttpResponse
 from django.views import View
 
 
+# JOIN ROOM
+# CREATE ROOM
+# START GAME
+
+
 class JoinRoomView(View):
     """View for a player client joining a room using basic (insecure) authentication."""
 
