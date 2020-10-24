@@ -20,17 +20,9 @@ class UserMeme(models.Model):
     The URL will simply be nulled.
     """
 
-    template = models.ForeignKey(
-        to="data_mine.MemeTemplate",
-        null=True,
-        on_delete=models.SET_NULL,
-    )
+    template = models.ForeignKey(to="data_mine.MemeTemplate", null=True, on_delete=models.SET_NULL)
 
-    player = models.ForeignKey(
-        to="game_state.Player",
-        null=True,
-        on_delete=models.SET_NULL,
-    )
+    player = models.ForeignKey(to="game_state.Player", null=True, on_delete=models.SET_NULL)
 
     url = models.CharField(
         null=True,
@@ -56,4 +48,5 @@ class UserMeme(models.Model):
 
     class Meta:
         verbose_name = "User Meme"
+
         verbose_name_plural = "User Memes"
