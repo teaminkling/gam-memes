@@ -7,3 +7,4 @@ class MemeBankConfig(AppConfig):
     """Configuration class for meme bank app."""
 
     name = "meme_bank"
+    verbose_name = "Meme Bank"

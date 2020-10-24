@@ -26,11 +26,18 @@ class UserMeme(models.Model):
         on_delete=models.SET_NULL,
     )
 
+    player = models.ForeignKey(
+        to="game_state.Player",
+        null=True,
+        on_delete=models.SET_NULL,
+    )
+
     url = models.CharField(
         null=True,
         max_length=512,
         unique=True,
         db_index=True,
+        verbose_name="URL",
         help_text="The URL to the user meme image stored on our server.",
     )
 
@@ -43,3 +50,10 @@ class UserMeme(models.Model):
 
         self.url = None
         self.save()
+
+    def __str__(self):
+        return f"UserMeme #{self.id} with URL {self.url} of Template '{self.template}'"
+
+    class Meta:
+        verbose_name = "User Meme"
+        verbose_name_plural = "User Memes"
