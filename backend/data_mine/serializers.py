@@ -17,4 +17,4 @@ class MemeTemplateSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MemeTemplate
 
-        fields = ("url", "approval_rating")
+        fields = ("url", "likes", "dislikes")

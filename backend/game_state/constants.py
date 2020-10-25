@@ -14,27 +14,32 @@ from typing import Collection, Tuple, Set
 # Game state constants.
 #
 
-GAME_STATE_CREATING: str = "Creating Game Room"
+GAME_STATE_CREATING: int = 1
+GAME_STATE_CREATING_DESCRIPTION: str = "Creating Game Room"
 """The game is being configured by the host user."""
 
-GAME_STATE_WAITING_FOR_PLAYERS: str = "Waiting for Players"
+GAME_STATE_WAITING_FOR_PLAYERS: int = 2
+GAME_STATE_WAITING_FOR_PLAYERS_DESCRIPTION: str = "Waiting for Players"
 """The game is waiting for the room host user to start."""
 
-GAME_STATE_FORGING_MEMES: str = "Forging Memes"
+GAME_STATE_FORGING_MEMES: int = 3
+GAME_STATE_FORGING_MEMES_DESCRIPTION: str = "Forging Memes"
 """Players are now creating memes under a time limit."""
 
-GAME_STATE_JUDGING_MEMES: str = "Judging Memes"
+GAME_STATE_JUDGING_MEMES: int = 4
+GAME_STATE_JUDGING_MEMES_DESCRIPTION: str = "Judging Memes"
 """Players are adding their votes to their preferred meme."""
 
-GAME_STATE_PRESENTING_WINNERS: str = "Presenting Winners"
+GAME_STATE_PRESENTING_WINNERS: int = 5
+GAME_STATE_PRESENTING_WINNERS_DESCRIPTION: str = "Presenting Winners"
 """The game is showing a presentation of the memes."""
 
 GAME_STATES: Collection[Tuple[int, str]] = (
-    (1, GAME_STATE_CREATING),
-    (2, GAME_STATE_WAITING_FOR_PLAYERS),
-    (3, GAME_STATE_FORGING_MEMES),
-    (4, GAME_STATE_JUDGING_MEMES),
-    (5, GAME_STATE_PRESENTING_WINNERS),
+    (GAME_STATE_CREATING, GAME_STATE_CREATING_DESCRIPTION),
+    (GAME_STATE_WAITING_FOR_PLAYERS, GAME_STATE_WAITING_FOR_PLAYERS_DESCRIPTION),
+    (GAME_STATE_FORGING_MEMES, GAME_STATE_FORGING_MEMES_DESCRIPTION),
+    (GAME_STATE_JUDGING_MEMES, GAME_STATE_JUDGING_MEMES_DESCRIPTION),
+    (GAME_STATE_PRESENTING_WINNERS, GAME_STATE_PRESENTING_WINNERS_DESCRIPTION),
 )
 """All the states a game can choose from."""
 

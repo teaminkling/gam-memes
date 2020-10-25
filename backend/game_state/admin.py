@@ -73,6 +73,7 @@ class GameAdmin(admin.ModelAdmin):
 
     fields = (
         "room_key",
+        "vip",
         "max_players_allowed",
         "time_per_turn",
         "max_rounds",
@@ -84,6 +85,7 @@ class GameAdmin(admin.ModelAdmin):
 
     list_display = (
         "room_key",
+        "vip",
         "players",
         "rounds",
         "time_per_turn",

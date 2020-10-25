@@ -12,6 +12,8 @@ import os
 from pathlib import Path
 from uuid import uuid4
 
+PROJECT_TITLE = "Memeforming (To-Be-Decided)"
+
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
@@ -102,6 +104,12 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
+
+#
+# Admin
+#
+
+GRAPPELLI_ADMIN_TITLE = f"{PROJECT_TITLE} Project Administration"
 
 #
 # DRF
