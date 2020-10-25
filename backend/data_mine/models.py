@@ -172,6 +172,7 @@ class MemeTemplateToGameThrough(models.Model):
 
         constraints = (
             models.constraints.UniqueConstraint(
-                name="no_duplicate_templates_for_a_game", fields=("game", "template"),
+                name="no_duplicate_templates_for_a_game",
+                fields=("game", "template"),
             ),
         )
