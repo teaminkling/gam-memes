@@ -6,7 +6,9 @@ import string
 import logging
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.db.models import QuerySet
 
+from data_mine.models import MemeTemplate, MemeTemplateToGameThrough
 from .constants import (
     GAME_ROOM_CODE_LENGTH,
     GAME_STATE_CREATING,
@@ -102,6 +104,11 @@ class Game(models.Model):
         """
         Get the number of players in this `Game`.
 
+        Notes
+        -----
+        There is no such property "meme template count" because it will always match the max
+        rounds count.
+
         Returns
         -------
         `int`
@@ -121,9 +128,23 @@ class Game(models.Model):
             The key.
         """
 
-        return str(
-            random.choice(string.ascii_uppercase) for _ in range(GAME_ROOM_CODE_LENGTH)
+        return "".join(
+            [random.choice(string.ascii_uppercase) for _ in range(GAME_ROOM_CODE_LENGTH)]
         )
+
+    def save(self, **kwargs):
+        # FIXME: If trying to serialize a room code, don't allow it!
+
+        # Handle unique room keys.
+
+        if not self.room_key:
+            self.room_key = Game._generate_unique_key()
+
+        # Handle meme templates associated with this game.
+
+        self._add_meme_templates()
+
+        return super().save(**kwargs)
 
     @staticmethod
     def _generate_unique_key() -> str:
@@ -132,12 +153,9 @@ class Game(models.Model):
         for attempt in range(TOTAL_CODE_REGEN_ATTEMPTS):
             # Keep trying for a key. They can't be a prohibited word nor taken already.
 
-            if all(
-                [
-                    key not in PROHIBITED_ROOM_CODE_WORDS,
-                    not Game.objects.filter(room_key=key).exists(),
-                ]
-            ):
+            key_allowed: bool = key not in PROHIBITED_ROOM_CODE_WORDS
+            key_unique: bool = not Game.objects.filter(room_key=key).exists()
+            if key_allowed and key_unique:
                 logger.info("Creating game room with key [%s].", attempt)
 
                 break
@@ -155,23 +173,19 @@ class Game(models.Model):
 
         return key
 
-    def save(self, **kwargs):
-        # Handle unique room keys.
+    def _add_meme_templates(self) -> None:
+        """
+        Add meme templates to the `Game`.
+        """
 
-        if self.room_key:
-            logger.warning(
-                (
-                    "Received a request with an existing room key [%s]. We will now ignore it and "
-                    "replace it with an algorithmically-determined one."
-                ),
-                self.room_key,
-            )
+        # TODO: This uses a naive purely random selection process. We should include weights.
 
-        self.room_key = Game._generate_unique_key()
+        templates: QuerySet[MemeTemplate] = MemeTemplate.objects.all().order_by(
+            "?"
+        )[:self.max_rounds]
 
-        # Handle meme templates associated with this game.
-
-        return super().save(**kwargs)
+        for template in templates:
+            MemeTemplateToGameThrough.objects.create(template=template, game=self)
 
     def __str__(self):
         return f"Game Room ({self.room_key})"

@@ -4,7 +4,6 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.html import format_html
 
-from game_state.models import Game
 from meme_bank.models import UserMeme
 
 
@@ -148,23 +147,29 @@ class MemeTemplateToGameThrough(models.Model):
     game = models.ForeignKey(to="game_state.Game", on_delete=models.CASCADE)
 
     order = models.PositiveSmallIntegerField(
-        default=0, help_text="The order-by field per-game."
+        help_text=(
+            "The order-by field per-game. You can have the same ordering value for memes but this "
+            "may have unpredictable results. This field is automatically set to N+1 if left as 0."
+        )
     )
 
     def save(self, **kwargs):
-        # Ensure order is +1 of what currently exists.
+        # Ensure order is +1 of what currently exists if creating a new order.
 
-        template_count: int = MemeTemplateToGameThrough.objects.filter(
-            game__room_key=self.game.room_key,
-        ).count()
+        if not self.pk or not self.order:
+            template_count: int = MemeTemplateToGameThrough.objects.filter(
+                game__room_key=self.game.room_key,
+            ).count()
 
-        self.order = template_count + 1
+            self.order = template_count + 1
 
         return super().save(**kwargs)
 
     class Meta:
+        ordering = ["order"]
+
         constraints = (
-            models.UniqueConstraint(
-                name="game_template_order_unique", fields=("game", "order")
+            models.constraints.UniqueConstraint(
+                name="no_duplicate_templates_for_a_game", fields=("game", "template"),
             ),
         )
