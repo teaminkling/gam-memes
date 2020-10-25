@@ -11,3 +11,4 @@ HISTORY.md
 node_modules/
 .nuxt/
 __pycache__/
+static/

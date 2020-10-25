@@ -25,9 +25,46 @@ class MemeTemplatesInGameAdminInline(admin.TabularInline):
     verbose_name = "Meme Template for this Game"
     verbose_name_plural = "Meme Templates for this Game"
 
-    fields = ("template", "order")
+    fields = ("template", "link", "image", "order")
+    readonly_fields = ("link", "image", )
 
     extra = 0
+
+    @staticmethod
+    def link(instance: MemeTemplateToGameThrough) -> str:
+        """
+        A clickable link representation of the provided `MemeTemplate`.
+
+        Parameters
+        ----------
+        instance : `MemeTemplateToGameThrough`
+            The through object.
+
+        Returns
+        -------
+        `str`
+            An HTML URL representation.
+        """
+
+        return instance.template.link
+
+    @staticmethod
+    def image(instance: MemeTemplateToGameThrough) -> str:
+        """
+        An image representation of the provided `MemeTemplate`.
+
+        Parameters
+        ----------
+        instance : `MemeTemplateToGameThrough`
+            The through object.
+
+        Returns
+        -------
+        `str`
+            An HTML image representation.
+        """
+
+        return instance.template.thumbnail
 
 
 @admin.register(Game)
