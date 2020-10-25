@@ -55,7 +55,22 @@ lots of todo items but these ones aren't in code comments:
 - rate limiting and other neat security features.
 - use of cache backend.
 - run collectstatic
+- associate the player with the user's current session (this is how requests are made)
+  - anonymous session: when a user is created it is permanently attached to the session which
+    does not clear for a browser until the timeout or it is manually cleared.
+      - this should work for ios too.
 
 ## constants
 
 modify your constants in frontend/constants
+
+## requests
+
+as few requests as possible: that's the motto. the game creation POST should create the VIP user
+for the game, create the game with the settings, and return a player list with the VIP user present.
+the GET request should return the names and the details for each player, not their IDs.
+
+in general, no IDs should be found in any serializer call: always the pure data.
+
+GET requests to the game endpoint should therefore provide the requested fields so it doesn't show
+the meme templates every time. this will help with bandwidth a bit.

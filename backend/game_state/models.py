@@ -4,11 +4,15 @@ import random
 import string
 
 import logging
+from typing import Any, Optional
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import QuerySet
+from django.utils.timezone import now
 
 from data_mine.models import MemeTemplate, MemeTemplateToGameThrough
+from meme_bank.models import UserMeme
 from .constants import (
     GAME_ROOM_CODE_LENGTH,
     GAME_STATE_CREATING,
@@ -43,6 +47,19 @@ class Game(models.Model):
     meme_templates = models.ManyToManyField(
         to="data_mine.MemeTemplate",
         through="data_mine.MemeTemplateToGameThrough",
+    )
+
+    vip = models.ForeignKey(
+        to="game_state.Player",
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        verbose_name="VIP",
+        related_name="game_vip_player",
+        help_text=(
+            "The VIP of this game that can modify the settings. If not set, it will eventually be "
+            "deleted by the system."
+        ),
     )
 
     #
@@ -100,6 +117,28 @@ class Game(models.Model):
     )
 
     @property
+    def time_until_next_state(self) -> Optional[int]:
+        """
+        Return the amount of time until the next state, in seconds.
+
+        Notes
+        -----
+        There is a grace time here that the client should disregard unless asking the API for
+        information. Clients should only do that on reconnect, and even then they should reduce
+        it by a certain grace period.
+
+        Returns
+        -------
+        `int`
+            The amount of time until the next state, in seconds.
+        """
+
+        if self.progressing_state_timestamp:
+            return (self.progressing_state_timestamp - now()).seconds
+
+        return None
+
+    @property
     def player_count(self) -> int:
         """
         Get the number of players in this `Game`.
@@ -133,18 +172,18 @@ class Game(models.Model):
         )
 
     def save(self, **kwargs):
-        # FIXME: If trying to serialize a room code, don't allow it!
-
         # Handle unique room keys.
 
         if not self.room_key:
             self.room_key = Game._generate_unique_key()
 
+        save_object: Any = super().save(**kwargs)
+
         # Handle meme templates associated with this game.
 
         self._add_meme_templates()
 
-        return super().save(**kwargs)
+        return save_object
 
     @staticmethod
     def _generate_unique_key() -> str:
@@ -194,21 +233,46 @@ class Game(models.Model):
 class Player(models.Model):
     """An ephemeral player, tied to a specific `Game` room."""
 
-    name = models.CharField(max_length=256, help_text="A player's chosen name.")
+    name = models.CharField(
+        max_length=256,
+        help_text="A player's chosen name. Cannot be changed once it is created.",
+    )
 
-    game = models.ForeignKey(to=Game, on_delete=models.CASCADE)
+    game = models.ForeignKey(
+        to=Game,
+        on_delete=models.CASCADE,
+        help_text="The game a player is connected to. Cannot be changed once it is created.",
+    )
 
     ready = models.BooleanField(default=False, help_text="If this player is ready.")
 
-    vip = models.BooleanField(
-        default=False,
-        verbose_name="VIP",
-        help_text="If this player is a VIP of the game they are in.",
-    )
+    score = models.PositiveIntegerField(default=0, help_text="The score this player has.")
 
-    score = models.PositiveIntegerField(
-        default=0, help_text="The score this player has."
-    )
+    @property
+    def latest_meme(self) -> Optional[UserMeme]:
+        """
+        If it exists, return the latest meme the player listed has just made.
+
+        Returns
+        -------
+        `Optional[UserMeme]`
+            The latest meme the player listed has just made.
+        """
+
+        return UserMeme.objects.filter(player_id=self.id).last()
+
+    @property
+    def vip(self) -> bool:
+        """
+        Return whether this player is a VIP of the game they are in.
+
+        Returns
+        -------
+        `bool`
+            Whether this player is a VIP of the game they are in.
+        """
+
+        return self.game.vip.id == self.id
 
     def __str__(self):
         return f"Player #{self.id} ({self.name}) of '{self.game}'"

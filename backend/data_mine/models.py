@@ -163,6 +163,8 @@ class MemeTemplateToGameThrough(models.Model):
 
             self.order = template_count + 1
 
+        # The game can be created in the same step. Ensure it is saved.
+
         return super().save(**kwargs)
 
     class Meta:
