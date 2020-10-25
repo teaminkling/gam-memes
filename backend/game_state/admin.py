@@ -26,7 +26,10 @@ class MemeTemplatesInGameAdminInline(admin.TabularInline):
     verbose_name_plural = "Meme Templates for this Game"
 
     fields = ("template", "link", "image", "order")
-    readonly_fields = ("link", "image", )
+    readonly_fields = (
+        "link",
+        "image",
+    )
 
     extra = 0
 

@@ -1,9 +1,8 @@
 """Models related to game state."""
 
+import logging
 import random
 import string
-
-import logging
 from typing import Any, Optional
 
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -20,7 +19,6 @@ from .constants import (
     TOTAL_CODE_REGEN_ATTEMPTS,
     PROHIBITED_ROOM_CODE_WORDS,
 )
-
 
 logger = logging.getLogger(__name__)
 
@@ -168,7 +166,10 @@ class Game(models.Model):
         """
 
         return "".join(
-            [random.choice(string.ascii_uppercase) for _ in range(GAME_ROOM_CODE_LENGTH)]
+            [
+                random.choice(string.ascii_uppercase)
+                for _ in range(GAME_ROOM_CODE_LENGTH)
+            ]
         )
 
     def save(self, **kwargs):
@@ -219,9 +220,9 @@ class Game(models.Model):
 
         # TODO: This uses a naive purely random selection process. We should include weights.
 
-        templates: QuerySet[MemeTemplate] = MemeTemplate.objects.all().order_by(
-            "?"
-        )[:self.max_rounds]
+        templates: QuerySet[MemeTemplate] = MemeTemplate.objects.all().order_by("?")[
+            : self.max_rounds
+        ]
 
         for template in templates:
             MemeTemplateToGameThrough.objects.create(template=template, game=self)
@@ -246,7 +247,9 @@ class Player(models.Model):
 
     ready = models.BooleanField(default=False, help_text="If this player is ready.")
 
-    score = models.PositiveIntegerField(default=0, help_text="The score this player has.")
+    score = models.PositiveIntegerField(
+        default=0, help_text="The score this player has."
+    )
 
     @property
     def latest_meme(self) -> Optional[UserMeme]:

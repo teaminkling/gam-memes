@@ -119,4 +119,3 @@ class GameSerializer(serializers.ModelSerializer):
             "state",
             "player_set",
         )
-
