@@ -11,7 +11,7 @@ def populate_meme_templates(_0, _1):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('data_mine', '0001_initial'),
+        ("data_mine", "0001_initial"),
     ]
 
     operations = [

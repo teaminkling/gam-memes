@@ -13,6 +13,8 @@ class MemeTemplateViewSet(viewsets.ModelViewSet):
     #        What we want is to have a method on the game to pick up N random items rather than
     #        ever calling it from a frontend client.
 
+    # TODO: Also since I'm here: add a link to the API root in grappelli and have proper auth.
+
     queryset = MemeTemplate.objects.all()
     serializer_class = MemeTemplateSerializer
-    http_method_names = ['get']
+    http_method_names = ["get"]

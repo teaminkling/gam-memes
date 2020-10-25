@@ -2,16 +2,30 @@
 
 from django.contrib import admin
 
+from data_mine.models import MemeTemplateToGameThrough
 from game_state.models import Game, Player
 
 
 class PlayersInGameAdminInline(admin.StackedInline):
-    """An inline admin view for the `Game` Admin view."""
+    """An inline admin view containing `Player`s for the `Game` Admin view."""
 
     model = Player
 
     verbose_name = "Player in this Game"
     verbose_name_plural = "Players in this Game"
+
+    extra = 0
+
+
+class MemeTemplatesInGameAdminInline(admin.TabularInline):
+    """An inline admin view containing `MemeTemplate`s for the `Game` Admin view."""
+
+    model = MemeTemplateToGameThrough
+
+    verbose_name = "Meme Template for this Game"
+    verbose_name_plural = "Meme Templates for this Game"
+
+    fields = ("template", "order")
 
     extra = 0
 
@@ -40,14 +54,18 @@ class GameAdmin(admin.ModelAdmin):
         "state",
     )
 
-    readonly_fields = (
-        "game_started_timestamp",
-        "progressing_state_timestamp",
-    )
-
     inlines = (
         PlayersInGameAdminInline,
+        MemeTemplatesInGameAdminInline,
     )
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            # On an edit.
+
+            return "room_key", "game_started_timestamp", "progressing_state_timestamp"
+
+        return "room_key", "game_started_timestamp"
 
     @staticmethod
     def players(instance: Game) -> str:

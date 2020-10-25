@@ -1,6 +1,7 @@
 """Models related to the meme bank."""
 
 from django.db import models
+from django.utils.html import format_html
 
 
 class UserMeme(models.Model):
@@ -20,9 +21,13 @@ class UserMeme(models.Model):
     The URL will simply be nulled.
     """
 
-    template = models.ForeignKey(to="data_mine.MemeTemplate", null=True, on_delete=models.SET_NULL)
+    template = models.ForeignKey(
+        to="data_mine.MemeTemplate", null=True, on_delete=models.SET_NULL
+    )
 
-    player = models.ForeignKey(to="game_state.Player", null=True, on_delete=models.SET_NULL)
+    player = models.ForeignKey(
+        to="game_state.Player", null=True, on_delete=models.SET_NULL
+    )
 
     url = models.CharField(
         null=True,
@@ -32,6 +37,57 @@ class UserMeme(models.Model):
         verbose_name="URL",
         help_text="The URL to the user meme image stored on our server.",
     )
+
+    @property
+    def image(self: "UserMeme") -> str:
+        """
+        An embeddable image.
+
+        Returns
+        -------
+        `str`
+            A formatted HTML image.
+        """
+
+        style_string: str = (
+            "max-height: 256px; filter: drop-shadow(0 0 0.5rem #333333);"
+        )
+
+        return format_html(f"<img src='{self.url}' style='{style_string}' />")
+
+    @property
+    def thumbnail(self: "UserMeme"):
+        """
+        An embeddable image for the list display.
+
+        Returns
+        -------
+        `str`
+            A formatted HTML image.
+        """
+
+        style_string: str = (
+            "max-height: 128px;"
+            "width: 100%;"
+            "max-width: 128px;"
+            "object-fit: cover;"
+            "filter: drop-shadow(0 0 0.25rem #333333);"
+        )
+
+        return format_html(f"<img src='{self.url}' style='{style_string}' />")
+
+    @property
+    def link(self: "UserMeme") -> str:
+        """
+        A clickable URL for this meme.
+
+        Returns
+        -------
+        `str`
+            A formatted HTML link.
+        """
+
+        return format_html(f"<a href='{self.url}' target='_blank'>{self.url}</a>")
 
     def nuke(self) -> None:
         """
