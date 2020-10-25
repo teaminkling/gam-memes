@@ -8,24 +8,78 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='MemeTemplate',
+            name="MemeTemplate",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('url', models.CharField(db_index=True, help_text='The URL to the template image stored on our server.', max_length=512, unique=True, verbose_name='URL')),
-                ('added_timestamp', models.DateTimeField(auto_now=True, help_text='The timestamp in which the template was data-mined or otherwise added.')),
-                ('likes', models.IntegerField(default=0, help_text='The number of times this template has been liked.')),
-                ('dislikes', models.IntegerField(default=0, help_text='The number of times this template has been disliked.')),
-                ('throw_back_probability', models.DecimalField(decimal_places=4, default=0.0, help_text='How likely is it that, when selected, the template will be ignored and a new one selected? This field is dynamically determined and goes from 0.0 to 1.0.', max_digits=16, validators=[django.core.validators.MaxValueValidator(1.0), django.core.validators.MinValueValidator(0.0)], verbose_name='Throw-back Probability')),
-                ('staleness_routine_override', models.BooleanField(default=False, help_text='If set, the throw-back probability will be frozen and not calculated by the staleness algorithm.', verbose_name='Staleness Routine Override')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "url",
+                    models.CharField(
+                        db_index=True,
+                        help_text="The URL to the template image stored on our server.",
+                        max_length=512,
+                        unique=True,
+                        verbose_name="URL",
+                    ),
+                ),
+                (
+                    "added_timestamp",
+                    models.DateTimeField(
+                        auto_now=True,
+                        help_text="The timestamp in which the template was data-mined or otherwise added.",
+                    ),
+                ),
+                (
+                    "likes",
+                    models.IntegerField(
+                        default=0,
+                        help_text="The number of times this template has been liked.",
+                    ),
+                ),
+                (
+                    "dislikes",
+                    models.IntegerField(
+                        default=0,
+                        help_text="The number of times this template has been disliked.",
+                    ),
+                ),
+                (
+                    "throw_back_probability",
+                    models.DecimalField(
+                        decimal_places=4,
+                        default=0.0,
+                        help_text="How likely is it that, when selected, the template will be ignored and a new one selected? This field is dynamically determined and goes from 0.0 to 1.0.",
+                        max_digits=16,
+                        validators=[
+                            django.core.validators.MaxValueValidator(1.0),
+                            django.core.validators.MinValueValidator(0.0),
+                        ],
+                        verbose_name="Throw-back Probability",
+                    ),
+                ),
+                (
+                    "staleness_routine_override",
+                    models.BooleanField(
+                        default=False,
+                        help_text="If set, the throw-back probability will be frozen and not calculated by the staleness algorithm.",
+                        verbose_name="Staleness Routine Override",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Meme Template',
-                'verbose_name_plural': 'Meme Templates',
+                "verbose_name": "Meme Template",
+                "verbose_name_plural": "Meme Templates",
             },
         ),
     ]

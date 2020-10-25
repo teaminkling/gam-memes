@@ -2,7 +2,9 @@
 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.utils.html import format_html
 
+from game_state.models import Game
 from meme_bank.models import UserMeme
 
 
@@ -28,12 +30,12 @@ class MemeTemplate(models.Model):
         help_text="The timestamp in which the template was data-mined or otherwise added.",
     )
 
-    likes = models.IntegerField(
+    likes = models.PositiveIntegerField(
         default=0,
         help_text="The number of times this template has been liked.",
     )
 
-    dislikes = models.IntegerField(
+    dislikes = models.PositiveIntegerField(
         default=0,
         help_text="The number of times this template has been disliked.",
     )
@@ -43,11 +45,11 @@ class MemeTemplate(models.Model):
         decimal_places=4,
         max_digits=16,
         verbose_name="Throw-back Probability",
+        validators=[MaxValueValidator(1.0), MinValueValidator(0.0)],
         help_text=(
             "How likely is it that, when selected, the template will be ignored and a new one "
             "selected? This field is dynamically determined and goes from 0.0 to 1.0."
         ),
-        validators=[MaxValueValidator(1.0), MinValueValidator(0.0)],
     )
 
     staleness_routine_override = models.BooleanField(
@@ -78,6 +80,57 @@ class MemeTemplate(models.Model):
 
     approval_rating.fget.short_description = "Approval Heuristic"
 
+    @property
+    def image(self: "MemeTemplate") -> str:
+        """
+        An embeddable image.
+
+        Returns
+        -------
+        `str`
+            A formatted HTML image.
+        """
+
+        style_string: str = (
+            "max-height: 256px; filter: drop-shadow(0 0 0.5rem #333333);"
+        )
+
+        return format_html(f"<img src='{self.url}' style='{style_string}' />")
+
+    @property
+    def thumbnail(self: "MemeTemplate"):
+        """
+        An embeddable image for the list display.
+
+        Returns
+        -------
+        `str`
+            A formatted HTML image.
+        """
+
+        style_string: str = (
+            "max-height: 128px;"
+            "width: 100%;"
+            "max-width: 128px;"
+            "object-fit: cover;"
+            "filter: drop-shadow(0 0 0.25rem #333333);"
+        )
+
+        return format_html(f"<img src='{self.url}' style='{style_string}' />")
+
+    @property
+    def link(self: "MemeTemplate") -> str:
+        """
+        A clickable URL for this meme.
+
+        Returns
+        -------
+        `str`
+            A formatted HTML link.
+        """
+
+        return format_html(f"<a href='{self.url}' target='_blank'>{self.url}</a>")
+
     def __str__(self):
         return f"Meme Template #{self.id} (URL={self.url})"
 
@@ -85,3 +138,33 @@ class MemeTemplate(models.Model):
         verbose_name = "Meme Template"
 
         verbose_name_plural = "Meme Templates"
+
+
+class MemeTemplateToGameThrough(models.Model):
+    """Through model for `MemeTemplate`s in a `Game`."""
+
+    template = models.ForeignKey(to="data_mine.MemeTemplate", on_delete=models.CASCADE)
+
+    game = models.ForeignKey(to="game_state.Game", on_delete=models.CASCADE)
+
+    order = models.PositiveSmallIntegerField(
+        default=0, help_text="The order-by field per-game."
+    )
+
+    def save(self, **kwargs):
+        # Ensure order is +1 of what currently exists.
+
+        template_count: int = MemeTemplateToGameThrough.objects.filter(
+            game__room_key=self.game.room_key,
+        ).count()
+
+        self.order = template_count + 1
+
+        return super().save(**kwargs)
+
+    class Meta:
+        constraints = (
+            models.UniqueConstraint(
+                name="game_template_order_unique", fields=("game", "order")
+            ),
+        )
