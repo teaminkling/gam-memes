@@ -16,24 +16,18 @@ This project and community will be a harassment-free experience for every collab
 disability, ethnicity, sexual characteristics, gender identity and expression, experience level, education,
 socioeconomic status, nationality, race, religion, sexual identity, or sexual orientation.
 
-> This isn't an exhaustive list and can be cited by discretion of maintainers.
-
 ### Professionalism
 
 Of course, friendly language may result in acceptable banter between collaborators. So what is acceptable and what
-is not?
+is not? As a base example:
 
 - Unwelcome sexual attention or advances are unacceptable.
 - Attacks on a person for any reason is unacceptable.
-
-> This isn't an exhaustive list and can be cited by discretion of maintainers.
 
 ## Team Inkling's Responsibilities
 
 Maintainers are responsible for overseeing the standards of acceptable behaviour within this project. This means we
 can and will edit, reject, and delete pull requests and issues if we can cite instances of unacceptable behaviour.
-
-> This list of actions is non-exhaustive.
 
 ## Scope
 
