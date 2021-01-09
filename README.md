@@ -32,8 +32,8 @@ username, it is possible to submit _any_ image as that user's submission.
 Build and run the frontend as a dev server:
 
 ```sh
-$ npm install
-$ npm run dev
+npm install
+npm run dev
 ```
 
 Run the Django backend also as a dev server:
@@ -41,11 +41,11 @@ Run the Django backend also as a dev server:
 > Every `manage.py` command must start with `DEBUG=1` or supply an explicit `SECRET_KEY`.
 
 ```sh
-$ pipenv install
-$ pipenv shell
-$ DEBUG=1 python manage.py collectstatic
-$ DEBUG=1 python manage.py migrate
-$ DEBUG=1 python manage.py runserver 8000
+pipenv install
+pipenv shell
+DEBUG=1 python manage.py collectstatic
+DEBUG=1 python manage.py migrate
+DEBUG=1 python manage.py runserver 8000
 ```
 
 ### Request/Response and not Websockets
