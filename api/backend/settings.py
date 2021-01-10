@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 from uuid import uuid4
 
+
 PROJECT_TITLE = "Memeforming (To-Be-Decided)"
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
