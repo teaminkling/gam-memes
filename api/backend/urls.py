@@ -1,10 +1,5 @@
 """Root URL config for the entire server application."""
 
-import os
-
-from django_typomatic import generate_ts
-
-from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
@@ -31,5 +26,3 @@ router.register(r"memes", UserMemeViewSet)
 urlpatterns += [
     path("api/", include(router.urls)),
 ]
-
-generate_ts(os.path.join(settings.TYPESCRIPT_MODEL_OUTPUT, "_auto_type.ts"))

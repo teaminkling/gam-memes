@@ -1,16 +1,10 @@
 """Serializers related to data mining."""
 
-import os
-
-from django_typomatic import ts_interface
-
-from django.conf import settings
 from rest_framework import serializers
 
 from data_mine.models import MemeTemplate
 
 
-@ts_interface()
 class MemeTemplateSerializer(serializers.HyperlinkedModelSerializer):
     """A serializer for the meme templates. Expected to only be used for `GET`."""
 
@@ -24,6 +18,3 @@ class MemeTemplateSerializer(serializers.HyperlinkedModelSerializer):
         model = MemeTemplate
 
         fields = ("url", "likes", "dislikes")
-
-
-
