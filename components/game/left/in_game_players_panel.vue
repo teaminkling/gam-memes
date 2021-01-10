@@ -32,7 +32,7 @@ export default {
       return appModuleStore.players;
     },
     remaining() {
-      /* We only check for falseyness of the ready value, not explicitly "Ready". */
+      /* We only check for falsey-ness of the ready value, not explicitly "Ready". */
 
       return appModuleStore.players.filter((player: Player) => !player.ready).length;
     },

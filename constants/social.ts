@@ -35,3 +35,13 @@ export const LICENSE_NAME: string = "Hippocratic License 2.1";
  * The hyperlink to the license of this project.
  */
 export const LICENSE_LINK: string = "https://firstdonoharm.dev/";
+
+/**
+ * The hyperlink to the privacy policy of this project.
+ */
+export const PRIVACY_LINK: string = "https://inklinginteractive.com/privacy/";
+
+/**
+ * The hyperlink to the terms and conditions of this project.
+ */
+export const TERMS_LINK: string = "https://inklinginteractive.com/terms/";

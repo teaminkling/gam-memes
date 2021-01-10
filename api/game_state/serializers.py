@@ -2,6 +2,8 @@
 
 import logging
 
+from django_typomatic import ts_interface
+
 from rest_framework import serializers
 from rest_framework.fields import CharField
 
@@ -12,6 +14,7 @@ from meme_bank.serializers import UserMemeSerializer
 logger = logging.getLogger(__name__)
 
 
+@ts_interface()
 class PlayerSerializer(serializers.ModelSerializer):
     """A serializer for the players."""
 
@@ -51,6 +54,7 @@ class PlayerSerializer(serializers.ModelSerializer):
         )
 
 
+@ts_interface()
 class GameSerializer(serializers.ModelSerializer):
     """A serializer for the meme templates."""
 
