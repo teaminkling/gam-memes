@@ -85,6 +85,12 @@ WSGI_APPLICATION = "backend.wsgi.application"
 ASGI_APPLICATION = "backend.asgi.application"
 
 #
+# TypeScript exports.
+#
+
+TYPESCRIPT_MODEL_OUTPUT = os.path.join(os.path.join(BASE_DIR, ".."), "data")
+
+#
 # Database configuration.
 #
 

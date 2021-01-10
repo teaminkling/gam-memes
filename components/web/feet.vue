@@ -55,6 +55,8 @@ import {
   GITHUB_FEATURE_REQUEST_PATH,
   GITHUB_REPO_LINK,
   LICENSE_LINK,
+  PRIVACY_LINK,
+  TERMS_LINK,
 } from '@/constants/social';
 
 export default {
@@ -74,6 +76,8 @@ export default {
       /* Legal. */
 
       "license_link"   : LICENSE_LINK,
+      "privacy_link"   : PRIVACY_LINK,
+      "terms_link"     : TERMS_LINK,
       "copyright_date" : `2020 - present`,
     }
   }

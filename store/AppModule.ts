@@ -16,7 +16,7 @@ export default class AppModule extends VuexModule {
 
   room_code: string = "";
 
-  /* Players currently in the client's game and the players' meta-information. */
+  /* Players currently in the client's game (not including the current player). */
 
   players: Player[] = [];
 
@@ -29,12 +29,17 @@ export default class AppModule extends VuexModule {
   memes: any[] = [];
 
   @Mutation
-  setName(name: string) {
+  set_name(name: string) {
     this.current_player.name = name;
   }
 
   @Mutation
-  setState(state: GameState) {
+  set_room_code(room_code: string) {
+    this.room_code = room_code;
+  }
+
+  @Mutation
+  set_state(state: GameState) {
     this.game_state = state;
   }
 }
