@@ -46,4 +46,3 @@ export.cfg
 export_presets.cfg
 *.translation
 .mono/
-data_*/
