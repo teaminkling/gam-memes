@@ -7,15 +7,12 @@ from rest_framework.fields import CharField
 
 from data_mine.serializers import MemeTemplateSerializer
 from game_state.models import Game, Player
-from meme_bank.serializers import UserMemeSerializer
 
 logger = logging.getLogger(__name__)
 
 
 class PlayerSerializer(serializers.ModelSerializer):
     """A serializer for the players."""
-
-    latest_meme = UserMemeSerializer()
 
     def update(self, instance: Player, validated_data: dict):
         if instance.name != validated_data.get("name"):
@@ -42,12 +39,10 @@ class PlayerSerializer(serializers.ModelSerializer):
             "game",
             "ready",
             "score",
-            "latest_meme",
         )
 
         read_only_fields = (
             "score",
-            "latest_meme",
         )
 
 

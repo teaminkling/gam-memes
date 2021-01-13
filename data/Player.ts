@@ -1,5 +1,3 @@
-// TODO: I should use Django Typomatic for this.
-
 export default interface Player {
   /**
    * A user's name.

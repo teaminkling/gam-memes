@@ -35,6 +35,8 @@ class UserMeme(models.Model):
         help_text="The URL to the user meme image stored on our server.",
     )
 
+    game = models.ForeignKey(to="game_state.Game", null=True, on_delete=models.SET_NULL)
+
     @property
     def image(self: "UserMeme") -> str:
         """
