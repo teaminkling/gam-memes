@@ -11,7 +11,7 @@ class UserMeme(models.Model):
     Notes
     -----
     A note to devs: the image is not likely to be viewed by anybody except for the people in a
-    game. Keep privacy in mind.
+    app. Keep privacy in mind.
 
     **Under no circumstances** should any meme URL ever be explicitly mined. Users trust us with
     the memes they make, and we should be mindful of such. As a result, while it might be easier

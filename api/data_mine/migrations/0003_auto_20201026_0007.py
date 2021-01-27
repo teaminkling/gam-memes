@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 (
                     "order",
                     models.PositiveSmallIntegerField(
-                        help_text="The order-by field per-game. You can have the same ordering value for memes but this may have unpredictable results. This field is automatically set to N+1 if left as 0."
+                        help_text="The order-by field per-app. You can have the same ordering value for memes but this may have unpredictable results. This field is automatically set to N+1 if col_00 as 0."
                     ),
                 ),
             ],

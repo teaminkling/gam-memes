@@ -1,14 +1,14 @@
 <template lang="pug">
 
   div.column
-    p judgingPanel
+    p winnerPanel
 
 </template>
 
 <script lang="ts">
 
 export default {
-  name: "judging_panel"
+  name: "col_03_state_04_awards"
 }
 
 </script>

@@ -1,4 +1,4 @@
-"""Models related to game state."""
+"""Models related to app state."""
 
 import logging
 import random
@@ -26,11 +26,11 @@ logger = logging.getLogger(__name__)
 
 class Game(models.Model):
     """
-    An ephemeral game room.
+    An ephemeral app room.
 
     Notes
     -----
-    The `Game` class does not handle self-deletion; other methods must delete game rooms to free
+    The `Game` class does not handle self-deletion; other methods must delete app rooms to free
     them for use by other players. There are a total possible 456976 concurrent games not including
     prohibited codes.
     """
@@ -56,7 +56,7 @@ class Game(models.Model):
         verbose_name="VIP",
         related_name="game_vip_player",
         help_text=(
-            "The VIP of this game that can modify the settings. If not set, it will eventually be "
+            "The VIP of this app that can modify the settings. If not set, it will eventually be "
             "deleted by the system."
         ),
     )
@@ -68,7 +68,7 @@ class Game(models.Model):
     max_players_allowed = models.PositiveSmallIntegerField(
         verbose_name="Max Players Allowed",
         validators=[MaxValueValidator(32), MinValueValidator(2)],
-        help_text="The max amount of allowed players in a game.",
+        help_text="The max amount of allowed players in a app.",
     )
 
     time_per_turn = models.PositiveSmallIntegerField(
@@ -112,7 +112,7 @@ class Game(models.Model):
     state = models.IntegerField(
         choices=GAME_STATES,
         default=GAME_STATE_CREATING,
-        help_text="The current game state, as also reflected in the game clients.",
+        help_text="The current app state, as also reflected in the app clients.",
     )
 
     @property
@@ -181,7 +181,7 @@ class Game(models.Model):
 
         save_object: Any = super().save(**kwargs)
 
-        # Handle meme templates associated with this game.
+        # Handle meme templates associated with this app.
 
         self._add_meme_templates()
 
@@ -197,7 +197,7 @@ class Game(models.Model):
             key_allowed: bool = key not in PROHIBITED_ROOM_CODE_WORDS
             key_unique: bool = not Game.objects.filter(room_key=key).exists()
             if key_allowed and key_unique:
-                logger.info("Creating game room with key [%s].", attempt)
+                logger.info("Creating app room with key [%s].", attempt)
 
                 break
             elif attempt == TOTAL_CODE_REGEN_ATTEMPTS - 1:
@@ -243,7 +243,7 @@ class Player(models.Model):
     game = models.ForeignKey(
         to=Game,
         on_delete=models.CASCADE,
-        help_text="The game a player is connected to. Cannot be changed once it is created.",
+        help_text="The app a player is connected to. Cannot be changed once it is created.",
     )
 
     ready = models.BooleanField(default=False, help_text="If this player is ready.")
@@ -268,12 +268,12 @@ class Player(models.Model):
     @property
     def vip(self) -> bool:
         """
-        Return whether this player is a VIP of the game they are in.
+        Return whether this player is a VIP of the app they are in.
 
         Returns
         -------
         `bool`
-            Whether this player is a VIP of the game they are in.
+            Whether this player is a VIP of the app they are in.
         """
 
         return self.game.vip.id == self.id
@@ -282,4 +282,4 @@ class Player(models.Model):
         return f"Player #{self.id} ({self.name}) of '{self.game}'"
 
     class Meta:
-        unique_together = (("game", "name"),)
+        unique_together = (("app", "name"),)

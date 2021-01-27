@@ -47,12 +47,12 @@
 
 <script lang="ts">
 
-import Player from "@/data/Player";
+import Player from "~/data/interfaces/Player";
 
-import { appModuleStore } from '@/store';
+import { appModuleStore } from '~/store';
 
 export default {
-  name: "room_code_panel",
+  name: "col_02_state_01_room_code",
   computed: {
     remaining() {
       /* We only check for falseyness of the ready value, not explicitly "Ready". */

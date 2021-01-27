@@ -13,9 +13,9 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name="memetemplatetogamethrough",
-            name="game",
+            name="app",
             field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE, to="game_state.game"
+                on_delete=django.db.models.deletion.CASCADE, to="game_state.app"
             ),
         ),
         migrations.AddField(
@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
         migrations.AddConstraint(
             model_name="memetemplatetogamethrough",
             constraint=models.UniqueConstraint(
-                fields=("game", "template"), name="no_duplicate_templates_for_a_game"
+                fields=("app", "template"), name="no_duplicate_templates_for_a_game"
             ),
         ),
     ]

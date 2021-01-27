@@ -1,4 +1,4 @@
-"""Viewsets for view behaviour of game state models."""
+"""Viewsets for view behaviour of app state models."""
 
 from rest_framework import viewsets
 
@@ -10,9 +10,9 @@ class GameViewSet(viewsets.ModelViewSet):
     """
     Viewset for `Game`s' API views.
 
-    - GET: For a specific game, get the details of that room.
+    - GET: For a specific app, get the details of that room.
     - POST: Create a new room.
-    - PUT: Update the specific game.
+    - PUT: Update the specific app.
     """
 
     # FIXME: Permissions are not correct.

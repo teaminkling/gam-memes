@@ -21,12 +21,12 @@
 
 <script lang="ts">
 
-import { appModuleStore } from '@/store';
+import { appModuleStore } from '~/store';
 
-import Player from "~/data/Player";
+import Player from "~/data/interfaces/Player";
 
 export default {
-  name: "in_game_players_panel",
+  name: "col_00_state_02_03_04_players",
   computed: {
     players() {
       return appModuleStore.players;

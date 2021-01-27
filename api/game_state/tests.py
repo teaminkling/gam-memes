@@ -1,1 +1,1 @@
-"""Tests for game state app."""
+"""Tests for app state app."""

@@ -7,7 +7,7 @@ from meme_bank.serializers import UserMemeSerializer
 
 
 class UserMemeViewSet(viewsets.ModelViewSet):
-    """A view set for all the memes created for each game."""
+    """A view set for all the memes created for each app."""
 
     # FIXME: Permissions here are not correct.
 

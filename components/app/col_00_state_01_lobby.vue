@@ -21,10 +21,10 @@
 
 <script lang="ts">
 
-import { appModuleStore } from '@/store';
+import { appModuleStore } from '~/store';
 
 export default {
-  name: "lobby_panel",
+  name: "col_00_state_01_lobby",
   computed: {
     players() {
       return appModuleStore.players;

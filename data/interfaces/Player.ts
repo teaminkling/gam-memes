@@ -16,7 +16,7 @@ export default interface Player {
    */
   vip: boolean,
   /**
-   * The score this player has in this game.
+   * The score this player has in this app.
    */
   score: number,
 }

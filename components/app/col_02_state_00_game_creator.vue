@@ -2,10 +2,10 @@
 
   div.panel-parent.column.has-text-centered
     div.create-pad
-      div.field.settings-field
+      div.field.ui-field
         label.label.is-large
           | Create Game
-        div.settings-input
+        div.ui-field
           button.button.is-large.is-rounded New Lobby
 
 </template>
@@ -13,7 +13,7 @@
 <script lang="ts">
 
 export default {
-  name: "game_creation_panel"
+  name: "col_02_state_00_game_creator"
 }
 
 </script>

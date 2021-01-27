@@ -17,6 +17,7 @@ coverage/
 ## Python
 
 .env
+venv/
 __pycache__/
 *.pyc
 

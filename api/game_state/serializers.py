@@ -1,4 +1,4 @@
-"""Serializers related to game state."""
+"""Serializers related to app state."""
 
 import logging
 
@@ -22,12 +22,12 @@ class PlayerSerializer(serializers.ModelSerializer):
 
             validated_data.pop("name")
 
-        if instance.game != validated_data.get("game"):
+        if instance.game != validated_data.get("app"):
             logger.warning(
-                "A player's game room cannot be changed post-create. Ignoring change request."
+                "A player's app room cannot be changed post-create. Ignoring change request."
             )
 
-            validated_data.pop("game")
+            validated_data.pop("app")
 
         return super().update(instance, validated_data)
 
@@ -36,7 +36,7 @@ class PlayerSerializer(serializers.ModelSerializer):
 
         fields = (
             "name",
-            "game",
+            "app",
             "ready",
             "score",
         )
@@ -66,7 +66,7 @@ class GameSerializer(serializers.ModelSerializer):
     def create(self, validated_data: dict):
         vip_name: str = validated_data.pop("vip_name")
 
-        # Create the game. It has no VIP.
+        # Create the app. It has no VIP.
 
         game: Game = super().create(validated_data)
 

@@ -1,0 +1,106 @@
+/* Theme style (colors & sizes). */
+
+@import "~bulma/sass/utilities/initial-variables";
+@import "themes/monokai";
+
+/* Core Libs & Lib configs. */
+
+@import "~bulma";
+
+/* Components (including mixins and dark mode). */
+
+@import "components/mixins";
+
+@import "components/nav-bar";
+@import "components/title-bar";
+@import "components/hero-bar";
+@import "components/card";
+@import "components/table";
+@import "components/tiles";
+@import "components/form";
+@import "components/main-section";
+@import "components/modal";
+@import "components/progress";
+@import "components/footer";
+@import "components/misc";
+
+@import "components/dark-mode";
+
+/*
+ * Icons.
+ */
+
+svg {
+  margin-right: 0.5em;
+}
+
+/*
+ * Game panel styles.
+ */
+
+.panel-parent {
+  margin: 10vh 1vw 0 1vw;
+
+  height: 100%;
+  min-height: 48vh;
+  max-height: 48vh;
+}
+
+.panel-header {
+  padding: 1.5em 0.2em 0.2em 0.3em;
+
+  font-weight: bold;
+}
+
+.create-pad {
+  margin-top: 16vh;
+}
+
+.ui-field {
+  padding: 0.75em;
+}
+
+.ui-field .ui-input {
+  margin: 0 auto;
+  padding-top: 24px;
+
+  width: 256px;
+}
+
+/*
+ * Tables.
+ *
+ * These are primarily expected to be used for player displays.
+ */
+
+tbody {
+  height: 43vh;
+
+  display: block;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding: 1.5em;
+  margin-top: 2em;
+}
+
+/*
+ * Custom scrollbar.
+ */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAFAFA;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #EAEAEA;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #AAAAAA;
+}

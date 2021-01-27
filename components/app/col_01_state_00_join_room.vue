@@ -4,9 +4,9 @@
 
   div.panel-parent.column.has-text-centered
     div.create-pad
-      div.field.settings-field
+      div.field.ui-field
         label.label.is-large Join Lobby
-        div.settings-input
+        div.ui-field
           input.input.is-large.is-rounded.has-text-centered(
             type="input", placeholder="Room Code.", @blur="update_room_code"
           )
@@ -17,10 +17,10 @@
 
 <script lang="ts">
 
-import { appModuleStore } from '@/store';
+import { appModuleStore } from '~/store';
 
 export default {
-  name: "join_room_panel",
+  name: "col_01_state_00_join_room",
   methods: {
     update_room_code(event: { target: HTMLInputElement }) {
       /* Update the room code in the state when the code field is unfocused. */

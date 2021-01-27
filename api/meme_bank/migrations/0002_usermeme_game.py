@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='usermeme',
-            name='game',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='game_state.game'),
+            name='app',
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='game_state.app'),
         ),
     ]

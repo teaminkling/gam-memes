@@ -3,36 +3,41 @@
   div#base
     div#wrapper
       div.container
-        navbar
+        page_navbar
+
         nuxt
-    feet
+    page_footer
 
 </template>
 
 <style scoped>
 
-  #base {
-    display: flex;
-    min-height: 120vh;
-    flex-direction: column;
-  }
+/*
+ * Min-height page content for sticky footer.
+ */
 
-  #wrapper {
-    flex: 1;
-  }
+#base {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#wrapper {
+  flex: 1;
+}
 
 </style>
 
 <script lang="ts">
 
-  import feet from "~/components/web/feet.vue";
-  import navbar from "~/components/web/navbar.vue";
+import page_footer from "~/components/web/page_footer.vue";
+import page_navbar from "~/components/web/page_navbar.vue";
 
-  export default {
-    components: {
-      feet,
-      navbar,
-    }
+export default {
+  components: {
+    page_footer,
+    page_navbar,
   }
+}
 
 </script>

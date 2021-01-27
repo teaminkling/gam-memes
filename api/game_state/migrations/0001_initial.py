@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 (
                     "max_players_allowed",
                     models.PositiveSmallIntegerField(
-                        help_text="The max amount of allowed players in a game.",
+                        help_text="The max amount of allowed players in a app.",
                         validators=[
                             django.core.validators.MaxValueValidator(32),
                             django.core.validators.MinValueValidator(2),
@@ -99,7 +99,7 @@ class Migration(migrations.Migration):
                             (5, "Presenting Winners"),
                         ],
                         default=1,
-                        help_text="The current game state, as also reflected in the game clients.",
+                        help_text="The current app state, as also reflected in the app clients.",
                     ),
                 ),
                 (
@@ -143,23 +143,23 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "game",
+                    "app",
                     models.ForeignKey(
-                        help_text="The game a player is connected to. Cannot be changed once it is created.",
+                        help_text="The app a player is connected to. Cannot be changed once it is created.",
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="game_state.game",
+                        to="game_state.app",
                     ),
                 ),
             ],
             options={
-                "unique_together": {("game", "name")},
+                "unique_together": {("app", "name")},
             },
         ),
         migrations.AddField(
-            model_name="game",
+            model_name="app",
             name="vip",
             field=models.ForeignKey(
-                help_text="The VIP of this game that can modify the settings.",
+                help_text="The VIP of this app that can modify the settings.",
                 on_delete=django.db.models.deletion.CASCADE,
                 related_name="game_vip_player",
                 to="game_state.player",

@@ -1,0 +1,232 @@
+@import "~bulma/sass/utilities/_all";
+
+/*
+ * Monokai colour variables.
+ */
+
+$monokai-black:                                 #272822;
+$monokai-black-lighter:                         #3e3d32;
+$monokai-black-lightest:                        #75715e;
+
+$monokai-white-darker:                          #cfcfc2;
+$monokai-white:                                 #f8f8f2;
+
+$monokai-orange:                                #fd971f;
+$monokai-yellow:                                #e6db74;
+$monokai-green:                                 #a6e22e;
+$monokai-lavender:                              #ae81ff;
+$monokai-cyan:                                  #a1efe4;
+$monokai-blue:                                  #66d9ef;
+$monokai-purple:                                #fd5ff0;
+$monokai-red:                                   #f92672;
+
+/*
+ * Base.
+ */
+
+$size-base:                                     1rem;
+$default-padding:                               $size-base * 1.5;
+
+$base-color:                                    $monokai-black-lighter;
+$base-color-light:                              $monokai-white-darker;
+
+/*
+ * General overrides.
+ */
+
+$hr-height:                                     1px;
+
+$primary:                                       $monokai-blue;
+$body-background-color:                         $monokai-white;
+$link:                                          $monokai-purple;
+$link-visited:                                  $monokai-lavender;
+$light-border:                                  1px solid $monokai-white-darker;
+$border:                                        $monokai-white-darker;
+
+/*
+ * Navbar overrides.
+ */
+
+$navbar-avatar-size:                            1.75rem;
+$navbar-item-h-padding:                         $default-padding * .75;
+
+$navbar-dropdown-item-active-color:             $base-color;
+
+$navbar-item-color:                             $monokai-black;
+$navbar-item-active-color:                      $monokai-black-lightest;
+
+$navbar-background-color:                       transparent;
+$navbar-item-hover-background-color:            transparent;
+$navbar-item-active-background-color:           transparent;
+$navbar-dropdown-item-hover-background-color:   transparent;
+$navbar-dropdown-item-active-background-color:  transparent;
+
+$navbar-divider-border:                         none;
+$navbar-box-shadow:                             none;
+
+/* These are unused. */
+
+$navbar-input-color:                            $grey-darker;
+$navbar-input-placeholder-color:                $grey-lighter;
+
+/*
+ * Aside overrides.
+ *
+ * Asides are not used in the project.
+ */
+
+$aside-width:                                   $size-base * 14;
+$aside-mobile-width:                            $size-base * 15;
+$aside-icon-width:                              $size-base * 3;
+$aside-submenu-font-size:                       $size-base * .95;
+
+$aside-box-shadow:                              1px 0 $base-color-light;
+
+$menu-item-hover-color:                         #272822;
+$aside-background-color:                        #f8f8f2;
+$aside-tools-color:                             #75715e;
+
+$menu-item-hover-background-color:              transparent;
+$aside-tools-background-color:                  transparent;
+$aside-dropdown-background-color:               transparent;
+
+/*
+ * Title bar overrides.
+ *
+ * Title bars are not used in the project.
+ */
+
+$title-bar-color:                               #75715e;
+$title-bar-active-color:                        #3e3d32;
+
+/*
+ * Hero bar overrides.
+ *
+ * Hero bars are not used in the project.
+ */
+
+$hero-bar-background:                           transparent;
+
+/*
+ * Card overrides.
+ *
+ * Cards are not used in the project.
+ */
+
+$card-border:                                   1px solid $base-color-light;
+$card-header-border-bottom-color:               $base-color-light;
+
+$card-background-color:                         transparent;
+
+/*
+ * Table overrides.
+ */
+
+$table-avatar-size:                             $size-base * 1.5;
+$table-avatar-size-mobile:                      25vw;
+
+$table-cell-border:                             1px solid $monokai-white-darker;
+
+/*
+ * Form overrides.
+ */
+
+$checkbox-border:                               1px solid $base-color;
+
+/*
+ * Overlay overrides.
+ */
+
+$overlay-background-color:                      rgba($monokai-white, .85);
+
+/*
+ * Modal overrides.
+ *
+ * Modals are not used in this project.
+ */
+
+$modal-z:                                       60;
+$modal-background-background-color:             rgba(10,10,10,.86);
+$modal-card-head-background-color:              $white;
+$modal-card-title-size:                         $size-base;
+$modal-card-body-padding:                       $default-padding 20px;
+$modal-card-head-border-bottom:                 1px solid $white-ter;
+
+$modal-card-width:                              40vw;
+$modal-card-width-mobile:                       90vw;
+$modal-card-foot-background-color:              $white;
+
+/*
+ * Notification overrides.
+ *
+ * Notifications are not used in this project.
+ */
+
+$notification-background-color:                 $white;
+
+$notification-padding:                          $default-padding * .75 $default-padding;
+
+/*
+ * Footer overrides.
+ */
+
+$footer-logo-height:                            $size-base * 2;
+$footer-padding:                                $default-padding * .33 $default-padding;
+
+$footer-background-color:                       transparent;
+
+footer.footer {
+  border-top: none !important;
+}
+
+/*
+ * Progress overrides.
+ */
+
+$progress-bar-background-color:                 transparent;
+
+/*
+ * Icon overrides.
+ */
+
+$icon-update-mark-size:                         $size-base * .5;
+$icon-update-mark-color:                        $monokai-yellow;
+
+/*
+ * Slider overrides.
+ */
+
+$slider-track-background:                       transparent;
+
+/*
+ * State colour overrides.
+ */
+
+$state-colors:
+                ('primary', $monokai-lavender, $monokai-white),
+                ('info', $monokai-cyan, $monokai-white),
+                ('success', $monokai-green, $monokai-white),
+                ('warning', $monokai-yellow, $monokai-black-lightest),
+                ('danger', $monokai-red, $monokai-white),
+                ('dark', $monokai-black-lighter, $monokai-white),
+                ('white', $monokai-white, $monokai-black-lighter);
+
+/*
+ * Dark mode segment.
+ */
+
+$dark-mode-background-color:                    $monokai-black;
+$dark-mode-lighter-background-color:            $monokai-black-lighter;
+$dark-mode-color:                               $monokai-white;
+$dark-mode-border-color:                        $monokai-white-darker;
+$dark-mode-border:                              1px solid $dark-mode-border-color;
+$dark-mode-light-border-color:                  $monokai-white-darker;
+$dark-mode-light-border:                        1px solid $dark-mode-light-border-color;
+$dark-mode-link-color:                          $link;
+$dark-mode-link-active-color:                   $monokai-purple;
+$dark-mode-link-hover-color:                    $link;
+$dark-mode-overlay-background-color: rgba($black, .85);
+$dark-mode-button-color: $white-ter;
+$dark-mode-button-hover-color: $black-ter;
+$dark-mode-card-header-button-color: $grey;
+$dark-mode-card-header-button-hover-color: $black-ter;

@@ -1,12 +1,30 @@
 export default {
   modules: [
-    '@nuxtjs/sitemap',
-    '@nuxtjs/redirect-module',
-    '@nuxtjs/bulma',
     '@nuxtjs/fontawesome',
+
+    /* Used for boring standard HTTP stuff. */
+
+    '@nuxtjs/redirect-module',
+    '@nuxtjs/sitemap',
+
+    /* Used to modify Bulma's colour palette. */
+
+    '@nuxtjs/style-resources',
   ],
-  mode: 'spa',
+  ssr: false,
   target: 'static',
+  head: {
+    title: 'Memeforming',
+    meta: [
+      {
+        charset: 'utf-8',
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1',
+      },
+    ],
+  },
   redirect: [
     {
       from: '^/security.txt',
@@ -15,26 +33,36 @@ export default {
     },
   ],
   css: [
-    "~layouts/global.css",
+    "~assets/scss/main.scss",
   ],
+  styleResources: {
+    /* Allows global use of .scss files. */
+
+    scss: [
+      '~assets/scss/main.scss'
+    ],
+  },
   fontawesome: {
     component: 'fa',
     icons: {
       solid: [
-        'faBalanceScale',
-        'faHeart',
-        'faLock',
-        'faHome',
-        'faAddressCard',
+        /* Footer. */
+
         'faFileAlt',
         'faUserShield',
-        'faGamepad',
-        'faBug',
-        'faPaintBrush',
+        'faHeart',
+
+        /* Light or dark mode. */
+
+        'faLightbulb',
+        'faMoon',
       ],
       brands: [
+        'faChrome',
         'faGithub',
-        'faDiscord',
+        'faApple',
+        'faGoogle',
+        'faSteam',
       ],
     }
   },
@@ -47,5 +75,13 @@ export default {
       }
     }
   },
-  buildModules: ['@nuxt/typescript-build'],
+  buildModules: [
+    /* Allow TypeScript building/sources. */
+
+    '@nuxt/typescript-build',
+
+    /* Support dark mode and adaptive colours. */
+
+    '@nuxtjs/color-mode',
+  ],
 };

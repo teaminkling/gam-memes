@@ -1,10 +1,10 @@
-"""Config file for game state app."""
+"""Config file for app state app."""
 
 from django.apps import AppConfig
 
 
 class GameStateConfig(AppConfig):
-    """Configuration class for game state app."""
+    """Configuration class for app state app."""
 
     name = "game_state"
 

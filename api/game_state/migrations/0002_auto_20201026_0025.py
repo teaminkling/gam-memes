@@ -11,11 +11,11 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name="game",
+            model_name="app",
             name="vip",
             field=models.ForeignKey(
                 blank=True,
-                help_text="The VIP of this game that can modify the settings. If not set, it will eventually be deleted by the system.",
+                help_text="The VIP of this app that can modify the settings. If not set, it will eventually be deleted by the system.",
                 null=True,
                 on_delete=django.db.models.deletion.CASCADE,
                 related_name="game_vip_player",

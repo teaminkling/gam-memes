@@ -1,5 +1,5 @@
-import Player from "~/data/Player";
-import Game from "~/data/Game";
+import Player from "~/data/interfaces/Player";
+import Game from "~/data/interfaces/Game";
 
 /**
  * A data representation for a user's meme.
@@ -11,6 +11,6 @@ export default interface Meme {
   /** The integer ID of the player who created this meme. */
   player: Player,
 
-  /** The game the meme was created in. */
+  /** The app the meme was created in. */
   game: Game,
 }

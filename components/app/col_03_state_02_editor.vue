@@ -23,7 +23,7 @@ import ImageEditor from '@toast-ui/vue-image-editor/src/ImageEditor.vue';
 import 'tui-image-editor/dist/tui-image-editor.css';
 
 export default {
-  name: "editor_panel",
+  name: "col_03_state_02_editor",
   components: {
     'tui': ImageEditor,
   },

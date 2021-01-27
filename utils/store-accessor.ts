@@ -1,9 +1,11 @@
 /**
- * Accessor module for store modules. If you add another module, you must add it here.
+ * Accessor module for store modules. This file is auto-generated, so please don't edit it here.
  */
 
 import { Store } from "vuex";
 import { getModule } from "vuex-module-decorators";
+
+/* Imports for module stores. */
 
 import AppModule from "~/store/AppModule";
 

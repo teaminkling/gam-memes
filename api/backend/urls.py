@@ -18,7 +18,7 @@ urlpatterns = [
 
 router = routers.DefaultRouter()
 
-router.register(r"game", GameViewSet)
+router.register(r"app", GameViewSet)
 router.register(r"player", PlayerViewSet)
 router.register(r"templates", MemeTemplateViewSet)
 router.register(r"memes", UserMemeViewSet)
