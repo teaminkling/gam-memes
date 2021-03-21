@@ -1,16 +1,22 @@
+#
 # Project-Specific
+#
 
 api/static/
 
+#
 # IDE and OS
+#
 
 .idea/
 .vscode/
 .DS_Store
 
+#
 # Environment
+#
 
-dist/
+# dist/  # GitHub Pages.
 coverage/
 /target/
 
