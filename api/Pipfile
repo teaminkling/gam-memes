@@ -7,7 +7,7 @@ verify_ssl = true
 
 [packages]
 celery = "*"
-django = "*"
+django = ">=3.1.6"
 django-filter = "*"
 django-grappelli = "*"
 djangorestframework = "*"
