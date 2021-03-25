@@ -22,12 +22,12 @@ class PlayerSerializer(serializers.ModelSerializer):
 
             validated_data.pop("name")
 
-        if instance.game != validated_data.get("app"):
+        if instance.game != validated_data.get("game"):
             logger.warning(
-                "A player's app room cannot be changed post-create. Ignoring change request."
+                "A player's game room cannot be changed post-create. Ignoring change request."
             )
 
-            validated_data.pop("app")
+            validated_data.pop("game")
 
         return super().update(instance, validated_data)
 
@@ -36,7 +36,7 @@ class PlayerSerializer(serializers.ModelSerializer):
 
         fields = (
             "name",
-            "app",
+            "game",
             "ready",
             "score",
         )

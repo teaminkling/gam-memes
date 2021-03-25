@@ -4,7 +4,7 @@ from django.apps import AppConfig
 
 
 class GameStateConfig(AppConfig):
-    """Configuration class for app state app."""
+    """Configuration class for game state app."""
 
     name = "game_state"
 

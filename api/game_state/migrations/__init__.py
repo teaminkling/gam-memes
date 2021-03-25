@@ -1,1 +1,1 @@
-"""Migrations for app state app."""
+"""Migrations for game state app."""

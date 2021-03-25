@@ -1,5 +1,5 @@
 """
-Constants used for the app state.
+Constants used for the game state.
 
 Notes
 -----
@@ -16,11 +16,11 @@ from typing import Collection, Tuple, Set
 
 GAME_STATE_CREATING: int = 1
 GAME_STATE_CREATING_DESCRIPTION: str = "Creating Game Room"
-"""The app is being configured by the host user."""
+"""The game is being configured by the host user."""
 
 GAME_STATE_WAITING_FOR_PLAYERS: int = 2
 GAME_STATE_WAITING_FOR_PLAYERS_DESCRIPTION: str = "Waiting for Players"
-"""The app is waiting for the room host user to start."""
+"""The game is waiting for the room host user to start."""
 
 GAME_STATE_FORGING_MEMES: int = 3
 GAME_STATE_FORGING_MEMES_DESCRIPTION: str = "Forging Memes"
@@ -32,7 +32,7 @@ GAME_STATE_JUDGING_MEMES_DESCRIPTION: str = "Judging Memes"
 
 GAME_STATE_PRESENTING_WINNERS: int = 5
 GAME_STATE_PRESENTING_WINNERS_DESCRIPTION: str = "Presenting Winners"
-"""The app is showing a presentation of the memes."""
+"""The game is showing a presentation of the memes."""
 
 GAME_STATES: Collection[Tuple[int, str]] = (
     (GAME_STATE_CREATING, GAME_STATE_CREATING_DESCRIPTION),
@@ -41,14 +41,14 @@ GAME_STATES: Collection[Tuple[int, str]] = (
     (GAME_STATE_JUDGING_MEMES, GAME_STATE_JUDGING_MEMES_DESCRIPTION),
     (GAME_STATE_PRESENTING_WINNERS, GAME_STATE_PRESENTING_WINNERS_DESCRIPTION),
 )
-"""All the states a app can choose from."""
+"""All the states a game can choose from."""
 
 #
 # Game room.
 #
 
 GAME_ROOM_CODE_LENGTH: int = 4
-"""The length of the app code."""
+"""The length of the game code."""
 
 TOTAL_CODE_REGEN_ATTEMPTS: int = 100
 """Number of attempts the system will make at most to regenerate the room code on collision."""
@@ -122,7 +122,7 @@ PROHIBITED_ROOM_CODE_WORDS: Set[str] = {
     "WANK",
 }
 """
-Words that should not show up on streams or may offend players of the app.
+Words that should not show up on streams or may offend players.
 
 Notes
 -----
@@ -130,6 +130,6 @@ Well, this isn't going to look good on the public code search.
 
 In all seriousness, Inkling Interactive is committed to ensuring a safe and friendly environment 
 for as many people as possible while playing our games or using our work. If you would like to 
-contribute to this list (especially if an offensive word has been seen in-app), please feel free
+contribute to this list (especially if an offensive word has been seen in-game), please feel free
 to contact us or open a pull request.
 """

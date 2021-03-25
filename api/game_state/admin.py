@@ -1,4 +1,4 @@
-"""Administrative view objects for app state models."""
+"""Administrative view objects for game state models."""
 
 from django.contrib import admin
 
@@ -155,12 +155,12 @@ class PlayerAdmin(admin.ModelAdmin):
         "ready",
         "vip",
         "score",
-        "app",
+        "game",
     )
 
     list_display = (
         "name",
-        "app",
+        "game",
         "ready",
         "vip",
         "score",

@@ -9,7 +9,7 @@ from meme_bank.models import UserMeme
 
 class MemeTemplate(models.Model):
     """
-    A meme template to be used by all app images.
+    A meme template to be used by all game images.
 
     Notes
     -----
@@ -62,7 +62,7 @@ class MemeTemplate(models.Model):
 
     @property
     def use_count(self) -> int:
-        """Get the amount of times this template has been used in the app."""
+        """Get the amount of times this template has been used."""
 
         return UserMeme.objects.filter(template_id=self.id).count()
 
@@ -148,7 +148,7 @@ class MemeTemplateToGameThrough(models.Model):
 
     order = models.PositiveSmallIntegerField(
         help_text=(
-            "The order-by field per-app. You can have the same ordering value for memes but this "
+            "The order-by field per-game. You can have the same ordering value for memes but this "
             "may have unpredictable results. This field is automatically set to N+1 if col_00 as 0."
         )
     )
@@ -163,7 +163,7 @@ class MemeTemplateToGameThrough(models.Model):
 
             self.order = template_count + 1
 
-        # The app can be created in the same step. Ensure it is saved.
+        # The game can be created in the same step. Ensure it is saved.
 
         return super().save(**kwargs)
 
@@ -173,6 +173,6 @@ class MemeTemplateToGameThrough(models.Model):
         constraints = (
             models.constraints.UniqueConstraint(
                 name="no_duplicate_templates_for_a_game",
-                fields=("app", "template"),
+                fields=("game", "template"),
             ),
         )

@@ -10,7 +10,7 @@ export const SITE_LINK: string = "https://inklinginteractive.com"
 /**
  * The hyperlink to the source repository for this project.
  */
-export const REPO_LINK: string = "https://github.com/teaminkling/memeforming";
+export const REPO_LINK: string = "https://github.com/teaminkling/gam-memes";
 
 /**
  * The hyperlink to the privacy policy of this project.
