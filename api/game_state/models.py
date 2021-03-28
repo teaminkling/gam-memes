@@ -219,7 +219,7 @@ class Game(models.Model):
         Add meme templates to the `Game`.
         """
 
-        # TODO: This uses a naive purely random selection process. We should include weights.
+        # TODO: This uses a naive purely random selection process. We should include weights. #22.
 
         templates: QuerySet[MemeTemplate] = MemeTemplate.objects.all().order_by("?")[
             : self.max_rounds

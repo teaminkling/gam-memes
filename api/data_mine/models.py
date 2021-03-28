@@ -73,7 +73,7 @@ class MemeTemplate(models.Model):
         """Get the approval heuristic based on view count, likes, and dislikes."""
 
         # TODO: This is a very basic algorithm for now does not influence view count. Research
-        #       must be done to determine a suitable algorithm including view count.
+        #       must be done to determine a suitable algorithm including view count. #22.
 
         return float(self.likes - self.dislikes)
 

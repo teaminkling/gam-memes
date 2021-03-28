@@ -15,7 +15,7 @@ class GameViewSet(viewsets.ModelViewSet):
     - PUT: Update the specific game.
     """
 
-    # FIXME: Permissions are not correct.
+    # FIXME: Permissions are not correct. #11.
 
     queryset = Game.objects.all()
     serializer_class = GameSerializer
@@ -34,7 +34,7 @@ class PlayerViewSet(viewsets.ModelViewSet):
         - The callee must have a session associated with the specific player under-call.
     """
 
-    # FIXME: Permissions are not correct.
+    # FIXME: Permissions are not correct. #11.
 
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
