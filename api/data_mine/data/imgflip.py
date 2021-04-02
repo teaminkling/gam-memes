@@ -1,5 +1,7 @@
 """Class dealing with the Imgflip source for meme templates."""
 
+# FIXME: Deprecated.
+
 import requests
 
 from requests.models import Response

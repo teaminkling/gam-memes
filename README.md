@@ -1,4 +1,4 @@
-# Project "Memeforming"
+# memeware.io
 
 > This application is unstable and not ready to be used.
 
@@ -6,32 +6,20 @@ A simple self-hosted/cloud meme creation game.
 
 ## About
 
-Join or create a private lobby, enter a code, grab a bunch of meme templates, make them arty,
-submit, and rate! This game is best experienced in Discord with friends.
+Join or create a private lobby, enter a code, grab a bunch of meme templates, make them funny,  submit, and rate!
+This game is best experienced in Discord with friends.
 
-## User Notes
-
-### User-Submitted Content
-
-This app relies on user-submitted content. We cannot ensure that the API backend we use for meme
-templates will not  show NSFW or infringing content.
-
-This is inevitable. The default API backend (Imgflip) is moderated and therefore the app should be
-_relatively_ safe, but we won't take liability for getting banned if an infringing image shows
-up on-stream.
-
-### Security
-
-There is minimal security in this app. Any room code can be joined (with very aggressive rate
-limiting) with a valid username. Theoretically, a user can join on two different devices and
-submit a meme submission twice.
-
-The second submission will overwrite the first one. If an attacker joins a room by knowing the room
-code and a username, it is possible to submit _any_ image as that user's submission.
+- Staff review process for boring, NSFW, infringing, or unfunny memes.
+- Secure guest (single device) or logged-in user support.
+- A robust backend for multiple different frontends.
+- A beautiful and unique default web frontend.
+- Open source with a permissive license for those who really don't like ads.
+- App-level rate limiting in conjunction with network-layer rate limiting.
+- REST and HTTP-based API for simplicity (not Websockets).
+- Support for `memcached` as a cache backend.
+- Optimised for PostgreSQL.
 
 ## Development
-
-The frontend shares data with the backend and helps build the state and 
 
 Build and run the frontend as a dev server:
 
@@ -40,24 +28,23 @@ npm install
 npm run dev
 ```
 
-Run the Django backend also as a dev server:
+Build the Django backend (assuming knowledge of `pyenv` and `pipenv`):
 
-> Every `manage.py` command must start with `DEBUG=1` or supply an explicit `SECRET_KEY`.
+> Every `manage.py` command must start with `DEBUG=1` (not recommended) or supply a `SECRET_KEY` (recommended).
 
 ```sh
-pipenv install
+pyenv install 3.8.8  # Or a later patch version. Later minor/major versions may also work.
+pipenv install       # Only need to do this once per dependency change.
 pipenv shell
-DEBUG=1 python manage.py collectstatic
-DEBUG=1 python manage.py migrate
-DEBUG=1 python manage.py runserver 8000
 ```
 
-### Request/Response and not Websockets
+Run the server:
 
-This project runs using REST + HTTP. I don't believe there will be much of a performance overhead
-for not using websockets. Long-polling and 30-second long promises can be made for pretty much
-anything that requires a response from the server, and the rest of the requests have an 
-immediate success/failure response pattern.
+```sh
+SECRET_KEY=<something> python manage.py collectstatic
+SECRET_KEY=<something> python manage.py migrate
+SECRET_KEY=<something> python manage.py runserver 8000
+```
 
 ### Directory Structure
 
@@ -76,20 +63,9 @@ This is the directory structure as a whole.
 └── utils         [ Vue frontend utilities. Likely won't need to be touched.      ]
 ```
 
-If I limit it to just important directories:
+### Notes
 
-```txt
-.
-├── api           [ Backend code as a full-fledged web API source.                ]
-├── components    [ Vue frontend-only components.                                 ]
-├── layouts       [ Vue frontend-only base layouts, styles, and scripts.          ]
-├── pages         [ Routing definition containing all app pages in the frontend.  ]
-└── static        [ Served static files (as-is) for the frontend.                 ]
-```
+Note that the frontends and backends are heavily separate from each other (for now); each change made to the backend 
+should be communicated to the frontend as well.
 
-## TODO
-
-- Adjust the allowed hosts.
-- Rate limiting.
-- Use of cache backend.
-- Move constants/things that are shared between frontend/backend to their own system.
+This is a monorepo with all Inkling Interactive frontends created in the same place.

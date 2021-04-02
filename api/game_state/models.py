@@ -46,6 +46,8 @@ class Game(models.Model):
     meme_templates = models.ManyToManyField(
         to="data_mine.MemeTemplate",
         through="data_mine.MemeTemplateToGameThrough",
+        verbose_name="Meme Templates",
+        help_text="The meme templates used in the game so far.",
     )
 
     vip = models.ForeignKey(
@@ -56,8 +58,8 @@ class Game(models.Model):
         verbose_name="VIP",
         related_name="game_vip_player",
         help_text=(
-            "The VIP of this game that can modify the settings. If not set, it will eventually be "
-            "deleted by the system."
+            "The VIP of this game that can modify the settings. If not set, this game will "
+            "eventually be garbage-collected by the system."
         ),
     )
 
@@ -79,7 +81,7 @@ class Game(models.Model):
 
     max_rounds = models.PositiveSmallIntegerField(
         verbose_name="Maximum Rounds",
-        validators=[MaxValueValidator(128), MinValueValidator(1)],
+        validators=[MaxValueValidator(32), MinValueValidator(1)],
         help_text="The total number of rounds and the final round.",
     )
 
@@ -99,7 +101,7 @@ class Game(models.Model):
     progressing_state_timestamp = models.DateTimeField(
         null=True,
         blank=True,
-        verbose_name="Next State Procs At",
+        verbose_name="Next State Activates At",
         help_text="The datetime that the state will transition to the next logical state.",
     )
 
@@ -219,7 +221,7 @@ class Game(models.Model):
         Add meme templates to the `Game`.
         """
 
-        # TODO: This uses a naive purely random selection process. We should include weights.
+        # TODO: This uses a naive purely random selection process. We should include weights. #22
 
         templates: QuerySet[MemeTemplate] = MemeTemplate.objects.all().order_by("?")[
             : self.max_rounds
