@@ -2,7 +2,7 @@
 
 from rest_framework import serializers
 
-from game_state.serializers import PlayerSerializer, GameSerializer
+from game_state.serializers import PlayerSerializer
 from meme_bank.models import UserMeme
 
 

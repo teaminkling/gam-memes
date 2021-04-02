@@ -20,14 +20,56 @@ class MemeTemplate(models.Model):
         db_index=True,
         max_length=512,
         unique=True,
-        verbose_name="URL",
+        verbose_name="Template URL",
         help_text="The URL to the template image stored on our server.",
     )
 
     added_timestamp = models.DateTimeField(
         auto_now=True,
+        verbose_name="Added Timestamp",
         help_text="The timestamp in which the template was data-mined or otherwise added.",
     )
+
+    #
+    # Review Algorithm
+    #
+
+    is_nsfw = models.NullBooleanField(
+        null=True,
+        blank=True,
+        verbose_name="Is NSFW",
+        help_text=(
+            "If blank, we don't know if this template is NSFW. If True, we think it may be NSFW "
+            "and will treat this accordingly (pending future review). If False, we know it is safe."
+        ),
+    )
+
+    reviewed_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name="Reviewed At",
+        help_text=(
+            "Timestamp for when this meme was manually reviewed for rating, freshness, "
+            "and potential NSFW content."
+        ),
+    )
+
+    retired_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name="Retired At",
+        help_text=(
+            "For any template, if a staff decides the meme should no longer appear for whatever "
+            "reason, this is set. This could be because the meme is so unfunny that nobody will "
+            "ever want to see it."
+        ),
+    )
+
+    # Note: when reviewing, the staleness percentage rises if we say a meme is "very well known."
+
+    #
+    # Meme Favourability Algorithm
+    #
 
     likes = models.PositiveIntegerField(
         default=0,
@@ -39,7 +81,11 @@ class MemeTemplate(models.Model):
         help_text="The number of times this template has been disliked.",
     )
 
-    throw_back_probability = models.DecimalField(
+    #
+    # Meme Freshness Algorithm
+    #
+
+    staleness_percentage = models.DecimalField(
         default=0.0,
         decimal_places=4,
         max_digits=16,
@@ -72,8 +118,7 @@ class MemeTemplate(models.Model):
     def approval_rating(self) -> float:
         """Get the approval heuristic based on view count, likes, and dislikes."""
 
-        # TODO: This is a very basic algorithm for now does not influence view count. Research
-        #       must be done to determine a suitable algorithm including view count. #22.
+        # TODO: This is a very basic algorithm for now does not influence view count. #22
 
         return float(self.likes - self.dislikes)
 
@@ -100,6 +145,10 @@ class MemeTemplate(models.Model):
     def thumbnail(self: "MemeTemplate"):
         """
         An embeddable image for the list display.
+
+        Notes
+        -----
+        This is exclusively used in the admin page. It loads a full-sized image.
 
         Returns
         -------
@@ -146,7 +195,14 @@ class MemeTemplateToGameThrough(models.Model):
 
     game = models.ForeignKey(to="game_state.Game", on_delete=models.CASCADE)
 
+    completed = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="If present, when this template for this game was completed.",
+    )
+
     order = models.PositiveSmallIntegerField(
+        default=0,
         help_text=(
             "The order-by field per-game. You can have the same ordering value for memes but this "
             "may have unpredictable results. This field is automatically set to N+1 if col_00 as 0."

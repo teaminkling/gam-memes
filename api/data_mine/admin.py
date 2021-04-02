@@ -24,11 +24,8 @@ class MemeTemplateAdmin(admin.ModelAdmin):
         "id",
         "thumbnail",
         "link",
-        "likes",
-        "dislikes",
         "approval_rating",
         "use_count",
-        "throw_back_probability",
     )
 
     readonly_fields = (

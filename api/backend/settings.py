@@ -13,7 +13,7 @@ from pathlib import Path
 from uuid import uuid4
 
 
-PROJECT_TITLE = "Memeforming (To-Be-Decided)"
+PROJECT_TITLE = "memeware.io"
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -31,7 +31,11 @@ elif not SECRET_KEY:
 
     SECRET_KEY = str(uuid4())
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    "memeware.io",
+    "localhost",
+    "127.0.0.1",
+]
 
 #
 # Application definition.
@@ -86,12 +90,6 @@ WSGI_APPLICATION = "backend.wsgi.application"
 ASGI_APPLICATION = "backend.asgi.application"
 
 #
-# TypeScript exports.
-#
-
-TYPESCRIPT_MODEL_OUTPUT = os.path.join(os.path.join(BASE_DIR, ".."), "data")
-
-#
 # Database configuration.
 #
 
@@ -122,9 +120,9 @@ GRAPPELLI_ADMIN_TITLE = f"{PROJECT_TITLE} Project Administration"
 # DRF
 #
 
+# Use Django's standard `django.contrib.auth` permissions, or allow read-only access.
+
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly",
     ],
