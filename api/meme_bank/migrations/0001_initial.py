@@ -9,23 +9,62 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('game_state', '0001_initial'),
-        ('data_mine', '0001_initial'),
+        ("game_state", "0001_initial"),
+        ("data_mine", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='UserMeme',
+            name="UserMeme",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('url', models.CharField(db_index=True, help_text='The URL to the user meme image stored on our server.', max_length=512, null=True, unique=True, verbose_name='URL')),
-                ('game', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='game_state.game')),
-                ('player', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='game_state.player')),
-                ('template', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='data_mine.memetemplate')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "url",
+                    models.CharField(
+                        db_index=True,
+                        help_text="The URL to the user meme image stored on our server.",
+                        max_length=512,
+                        null=True,
+                        unique=True,
+                        verbose_name="URL",
+                    ),
+                ),
+                (
+                    "game",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="game_state.game",
+                    ),
+                ),
+                (
+                    "player",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="game_state.player",
+                    ),
+                ),
+                (
+                    "template",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="data_mine.memetemplate",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'User Meme',
-                'verbose_name_plural': 'User Memes',
+                "verbose_name": "User Meme",
+                "verbose_name_plural": "User Memes",
             },
         ),
     ]

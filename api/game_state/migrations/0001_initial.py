@@ -10,40 +10,165 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('data_mine', '0001_initial'),
+        ("data_mine", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Game',
+            name="Game",
             fields=[
-                ('room_key', models.CharField(help_text='The unique room key.', max_length=4, primary_key=True, serialize=False, unique=True, verbose_name='Room Key')),
-                ('max_players_allowed', models.PositiveSmallIntegerField(help_text='The max amount of allowed players in a game.', validators=[django.core.validators.MaxValueValidator(32), django.core.validators.MinValueValidator(2)], verbose_name='Max Players Allowed')),
-                ('time_per_turn', models.PositiveSmallIntegerField(help_text='Number of seconds per turn.', validators=[django.core.validators.MaxValueValidator(600), django.core.validators.MinValueValidator(10)], verbose_name='Time Per Turn')),
-                ('max_rounds', models.PositiveSmallIntegerField(help_text='The total number of rounds and the final round.', validators=[django.core.validators.MaxValueValidator(32), django.core.validators.MinValueValidator(1)], verbose_name='Maximum Rounds')),
-                ('game_started_timestamp', models.DateTimeField(auto_now=True, help_text="The timestamp of the room's creation. It is used to calculate when the room should be deleted.", verbose_name='Game Started Timestamp')),
-                ('progressing_state_timestamp', models.DateTimeField(blank=True, help_text='The datetime that the state will transition to the next logical state.', null=True, verbose_name='Next State Activates At')),
-                ('round', models.PositiveSmallIntegerField(default=1, help_text='The current round. This number starts at Round 1 and ends at round MAX.', validators=[django.core.validators.MaxValueValidator(128), django.core.validators.MinValueValidator(1)])),
-                ('state', models.IntegerField(choices=[(1, 'Creating Game Room'), (2, 'Waiting for Players'), (3, 'Forging Memes'), (4, 'Judging Memes'), (5, 'Presenting Winners')], default=1, help_text='The current game state, as also reflected in the game clients.')),
-                ('meme_templates', models.ManyToManyField(help_text='The meme templates used in the game so far.', through='data_mine.MemeTemplateToGameThrough', to='data_mine.MemeTemplate', verbose_name='Meme Templates')),
+                (
+                    "room_key",
+                    models.CharField(
+                        help_text="The unique room key.",
+                        max_length=4,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                        verbose_name="Room Key",
+                    ),
+                ),
+                (
+                    "max_players_allowed",
+                    models.PositiveSmallIntegerField(
+                        help_text="The max amount of allowed players in a game.",
+                        validators=[
+                            django.core.validators.MaxValueValidator(32),
+                            django.core.validators.MinValueValidator(2),
+                        ],
+                        verbose_name="Max Players Allowed",
+                    ),
+                ),
+                (
+                    "time_per_turn",
+                    models.PositiveSmallIntegerField(
+                        help_text="Number of seconds per turn.",
+                        validators=[
+                            django.core.validators.MaxValueValidator(600),
+                            django.core.validators.MinValueValidator(10),
+                        ],
+                        verbose_name="Time Per Turn",
+                    ),
+                ),
+                (
+                    "max_rounds",
+                    models.PositiveSmallIntegerField(
+                        help_text="The total number of rounds and the final round.",
+                        validators=[
+                            django.core.validators.MaxValueValidator(32),
+                            django.core.validators.MinValueValidator(1),
+                        ],
+                        verbose_name="Maximum Rounds",
+                    ),
+                ),
+                (
+                    "game_started_timestamp",
+                    models.DateTimeField(
+                        auto_now=True,
+                        help_text="The timestamp of the room's creation. It is used to calculate when the room should be deleted.",
+                        verbose_name="Game Started Timestamp",
+                    ),
+                ),
+                (
+                    "progressing_state_timestamp",
+                    models.DateTimeField(
+                        blank=True,
+                        help_text="The datetime that the state will transition to the next logical state.",
+                        null=True,
+                        verbose_name="Next State Activates At",
+                    ),
+                ),
+                (
+                    "round",
+                    models.PositiveSmallIntegerField(
+                        default=1,
+                        help_text="The current round. This number starts at Round 1 and ends at round MAX.",
+                        validators=[
+                            django.core.validators.MaxValueValidator(128),
+                            django.core.validators.MinValueValidator(1),
+                        ],
+                    ),
+                ),
+                (
+                    "state",
+                    models.IntegerField(
+                        choices=[
+                            (1, "Creating Game Room"),
+                            (2, "Waiting for Players"),
+                            (3, "Forging Memes"),
+                            (4, "Judging Memes"),
+                            (5, "Presenting Winners"),
+                        ],
+                        default=1,
+                        help_text="The current game state, as also reflected in the game clients.",
+                    ),
+                ),
+                (
+                    "meme_templates",
+                    models.ManyToManyField(
+                        help_text="The meme templates used in the game so far.",
+                        through="data_mine.MemeTemplateToGameThrough",
+                        to="data_mine.MemeTemplate",
+                        verbose_name="Meme Templates",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Player',
+            name="Player",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text="A player's chosen name. Cannot be changed once it is created.", max_length=256)),
-                ('ready', models.BooleanField(default=False, help_text='If this player is ready.')),
-                ('score', models.PositiveIntegerField(default=0, help_text='The score this player has.')),
-                ('game', models.ForeignKey(help_text='The game a player is connected to. Cannot be changed once it is created.', on_delete=django.db.models.deletion.CASCADE, to='game_state.game')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="A player's chosen name. Cannot be changed once it is created.",
+                        max_length=256,
+                    ),
+                ),
+                (
+                    "ready",
+                    models.BooleanField(
+                        default=False, help_text="If this player is ready."
+                    ),
+                ),
+                (
+                    "score",
+                    models.PositiveIntegerField(
+                        default=0, help_text="The score this player has."
+                    ),
+                ),
+                (
+                    "game",
+                    models.ForeignKey(
+                        help_text="The game a player is connected to. Cannot be changed once it is created.",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="game_state.game",
+                    ),
+                ),
             ],
             options={
-                'unique_together': {('game', 'name')},
+                "unique_together": {("game", "name")},
             },
         ),
         migrations.AddField(
-            model_name='game',
-            name='vip',
-            field=models.ForeignKey(blank=True, help_text='The VIP of this game that can modify the settings. If not set, this game will eventually be garbage-collected by the system.', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='game_vip_player', to='game_state.player', verbose_name='VIP'),
+            model_name="game",
+            name="vip",
+            field=models.ForeignKey(
+                blank=True,
+                help_text="The VIP of this game that can modify the settings. If not set, this game will eventually be garbage-collected by the system.",
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="game_vip_player",
+                to="game_state.player",
+                verbose_name="VIP",
+            ),
         ),
     ]

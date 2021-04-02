@@ -9,23 +9,29 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('game_state', '0001_initial'),
-        ('data_mine', '0001_initial'),
+        ("game_state", "0001_initial"),
+        ("data_mine", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='memetemplatetogamethrough',
-            name='game',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='game_state.game'),
+            model_name="memetemplatetogamethrough",
+            name="game",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="game_state.game"
+            ),
         ),
         migrations.AddField(
-            model_name='memetemplatetogamethrough',
-            name='template',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='data_mine.memetemplate'),
+            model_name="memetemplatetogamethrough",
+            name="template",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="data_mine.memetemplate"
+            ),
         ),
         migrations.AddConstraint(
-            model_name='memetemplatetogamethrough',
-            constraint=models.UniqueConstraint(fields=('game', 'template'), name='no_duplicate_templates_for_a_game'),
+            model_name="memetemplatetogamethrough",
+            constraint=models.UniqueConstraint(
+                fields=("game", "template"), name="no_duplicate_templates_for_a_game"
+            ),
         ),
     ]

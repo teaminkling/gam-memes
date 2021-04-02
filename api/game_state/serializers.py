@@ -41,9 +41,7 @@ class PlayerSerializer(serializers.ModelSerializer):
             "score",
         )
 
-        read_only_fields = (
-            "score",
-        )
+        read_only_fields = ("score",)
 
 
 class GameSerializer(serializers.ModelSerializer):
